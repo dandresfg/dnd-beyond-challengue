@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmConfigService } from './config/database.config';
 import { CharacterModule } from './character/character.module';
 import { InitModule } from './init/init.module';
+import { CharacterEventsHandler } from './events/character-events.handler';
 
 @Module({
   imports: [
@@ -16,10 +18,11 @@ import { InitModule } from './init/init.module';
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
     }),
+    EventEmitterModule.forRoot(),
     CharacterModule,
     InitModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CharacterEventsHandler],
 })
 export class AppModule {}
