@@ -10,13 +10,18 @@ export class InitService implements OnModuleInit {
   constructor(private readonly characterRepository: CharacterRepository) {}
 
   async onModuleInit() {
-    const existing = await this.characterRepository.findByName('Briv');
+    try {
+      const existing = await this.characterRepository.findByName('Briv');
+      if (existing) return;
 
-    if (existing) return;
-    const brivPath = path.join(process.cwd(), 'briv.json');
-    const brivData = JSON.parse(fs.readFileSync(brivPath, 'utf-8'));
+      const brivPath = path.join(process.cwd(), 'briv.json');
+      const brivData = JSON.parse(fs.readFileSync(brivPath, 'utf-8'));
 
-    await this.characterRepository.loadFromJson(brivData);
-    this.logger.log('Seeding from briv.json');
+      await this.characterRepository.loadFromJson(brivData);
+      this.logger.log('Seeding from briv.json');
+    } catch (error) {
+      this.logger.error('Failed to initialize character data', error);
+      throw error;
+    }
   }
 }

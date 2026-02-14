@@ -63,10 +63,10 @@ export class Character {
 
   getStat(stat: keyof IStats): number {
     const baseValue = this.stats[stat];
-    const filteredItems = this.items.filter(
+    const filteredItems = (this.items || []).filter(
       (item) =>
-        item.modifier.affectedObject === 'stats' &&
-        item.modifier.affectedValue === stat,
+        item.modifier?.affectedObject === 'stats' &&
+        item.modifier?.affectedValue === stat,
     );
 
     const itemBonus = filteredItems.reduce(
