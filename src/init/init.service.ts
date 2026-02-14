@@ -1,0 +1,22 @@
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { CharacterRepository } from '../character/character.repository';
+import * as fs from 'fs';
+import * as path from 'path';
+
+@Injectable()
+export class InitService implements OnModuleInit {
+  private readonly logger = new Logger(InitService.name);
+
+  constructor(private readonly characterRepository: CharacterRepository) {}
+
+  async onModuleInit() {
+    const existing = await this.characterRepository.findByName('Briv');
+
+    if (existing) return;
+    const brivPath = path.join(process.cwd(), 'briv.json');
+    const brivData = JSON.parse(fs.readFileSync(brivPath, 'utf-8'));
+
+    await this.characterRepository.loadFromJson(brivData);
+    this.logger.log('Seeding from briv.json');
+  }
+}
