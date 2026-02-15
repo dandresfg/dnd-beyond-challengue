@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { DamageType, DefenseType } from '../lib/types/damage.types';
 
 export interface IClass {
   name: string;
@@ -25,8 +26,8 @@ export interface IItem {
 }
 
 export interface IDefense {
-  type: string; // "fire", "slashing", etc.
-  defense: 'immunity' | 'resistance';
+  type: DamageType;
+  defense: DefenseType;
 }
 
 @Entity()

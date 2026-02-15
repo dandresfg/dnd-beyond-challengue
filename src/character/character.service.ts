@@ -1,11 +1,29 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { CharacterRepository } from './character.repository';
 import { CharacterResponseDto } from './character.dto';
 import { Character } from './character.entity';
+import { DamageType } from '../lib/types/damage.types';
+import { DamageCalculator } from '../lib/damage.calculator';
+import { TempHpCalculator } from '../lib/temp-hp.calculator';
+import { CharacterEventNames } from '../events/character-event.dto';
+import {
+  CharacterDamagedEvent,
+  CharacterHealedEvent,
+  CharacterDiedEvent,
+  TempHpAddedEvent,
+} from '../events/character.events';
 
 @Injectable()
 export class CharacterService {
-  constructor(private readonly characterRepository: CharacterRepository) {}
+  constructor(
+    private readonly characterRepository: CharacterRepository,
+    private readonly eventEmitter: EventEmitter2,
+  ) {}
 
   async findAll(): Promise<CharacterResponseDto[]> {
     const characters = await this.characterRepository.find();
@@ -24,7 +42,7 @@ export class CharacterService {
 
   async dealDamage(
     slug: string,
-    damageType: string,
+    damageType: DamageType,
     amount: number,
   ): Promise<CharacterResponseDto> {
     const character = await this.characterRepository.findBySlug(slug);
@@ -33,16 +51,27 @@ export class CharacterService {
       throw new NotFoundException(`Character "${slug}" not found`);
     }
 
-    // TODO Phase 6: Calculate effective damage (resistance/immunity)
-    // TODO Phase 6: Apply to temp HP first, then current HP
-    // TODO Phase 6: Emit CharacterDamagedEvent
-    // TODO Phase 6: Check if character died and emit CharacterDiedEvent
+    const effectiveDamage = DamageCalculator.calculateEffectiveDamage(
+      character,
+      damageType,
+      amount,
+    );
 
-    // Naive implementation for now - just subtract from currentHp
-    const effectiveDamage = amount;
-    character.currentHp = Math.max(0, character.currentHp - effectiveDamage);
+    TempHpCalculator.applyDamageToHp(character, effectiveDamage);
 
     await this.characterRepository.save(character);
+
+    this.eventEmitter.emit(
+      CharacterEventNames.DAMAGED,
+      new CharacterDamagedEvent(character, damageType, amount, effectiveDamage),
+    );
+
+    if (character.currentHp === 0) {
+      this.eventEmitter.emit(
+        CharacterEventNames.DIED,
+        new CharacterDiedEvent(character),
+      );
+    }
 
     return this.toDto(character);
   }
@@ -54,15 +83,27 @@ export class CharacterService {
       throw new NotFoundException(`Character "${slug}" not found`);
     }
 
-    // TODO Phase 6: Emit CharacterHealedEvent
+    if (character.currentHp === 0) {
+      throw new BadRequestException('Cannot heal a dead character');
+    }
 
-    // Healing cannot exceed max HP
+    const previousHp = character.currentHp;
+
     character.currentHp = Math.min(
       character.hitPoints,
       character.currentHp + amount,
     );
 
+    const actualHealing = character.currentHp - previousHp;
+
     await this.characterRepository.save(character);
+
+    if (actualHealing > 0) {
+      this.eventEmitter.emit(
+        CharacterEventNames.HEALED,
+        new CharacterHealedEvent(character, actualHealing),
+      );
+    }
 
     return this.toDto(character);
   }
@@ -74,12 +115,16 @@ export class CharacterService {
       throw new NotFoundException(`Character "${slug}" not found`);
     }
 
-    // TODO Phase 6: Emit TempHpAddedEvent
-
-    // Temp HP takes the maximum value, not additive
-    character.tempHp = Math.max(character.tempHp, amount);
+    const previousTempHp = TempHpCalculator.addTempHp(character, amount);
 
     await this.characterRepository.save(character);
+
+    if (character.tempHp !== previousTempHp) {
+      this.eventEmitter.emit(
+        CharacterEventNames.TEMP_HP_ADDED,
+        new TempHpAddedEvent(character, previousTempHp),
+      );
+    }
 
     return this.toDto(character);
   }

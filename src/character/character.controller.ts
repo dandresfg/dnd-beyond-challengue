@@ -8,7 +8,7 @@ import {
   AddTempHpDto,
   CHARACTER_SLUG_PARAM_SCHEMA,
 } from './character.dto';
-import { SlugValidationPipe } from './pipes/slug-validation.pipe';
+import { SlugValidationPipe } from '../lib/pipes/slug-validation.pipe';
 
 @ApiTags('Character')
 @Controller('characters')

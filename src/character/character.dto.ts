@@ -1,7 +1,8 @@
-import { IsString, IsNumber, Min } from 'class-validator';
+import { IsNumber, Min, IsEnum } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { IClass, IStats, IItem, IDefense } from './character.entity';
-import { SLUG_REGEX } from './pipes/slug-validation.pipe';
+import { DamageType } from '../lib/types/damage.types';
+import { SLUG_REGEX } from '../lib/pipes/slug-validation.pipe';
 
 // Response DTO - used by all endpoints
 export class CharacterResponseDto {
@@ -88,11 +89,12 @@ export class CharacterResponseDto {
 // Request DTOs
 export class DealDamageDto {
   @ApiProperty({
-    description: 'Type of damage (e.g., fire, slashing, bludgeoning, piercing)',
-    example: 'fire',
+    description: 'D&D 5e damage type',
+    enum: DamageType,
+    example: DamageType.FIRE,
   })
-  @IsString()
-  damageType: string;
+  @IsEnum(DamageType)
+  damageType: DamageType;
 
   @ApiProperty({
     description: 'Amount of damage to deal',
