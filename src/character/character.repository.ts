@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { Character } from './character.entity';
+import { Character, generateSlug } from './character.entity';
 
 @Injectable()
 export class CharacterRepository extends Repository<Character> {
@@ -15,12 +15,17 @@ export class CharacterRepository extends Repository<Character> {
     return this.findOne({ where: { name } });
   }
 
+  async findBySlug(slug: string): Promise<Character | null> {
+    return this.findOne({ where: { slug } });
+  }
+
   /**
    * Load character from JSON data
    */
   async loadFromJson(jsonData: any): Promise<Character> {
     const character = this.create({
       name: jsonData.name,
+      slug: generateSlug(jsonData.name),
       level: jsonData.level,
       hitPoints: jsonData.hitPoints,
       currentHp: jsonData.hitPoints, // Initialize current HP to max

@@ -34,8 +34,11 @@ export class Character {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true })
+  @Column()
   name: string;
+
+  @Column({ unique: true })
+  slug: string;
 
   @Column()
   level: number;
@@ -81,4 +84,18 @@ export class Character {
     const effectiveStat = this.getStat(stat);
     return Math.floor((effectiveStat - 10) / 2);
   }
+}
+
+/**
+ * Generate a URL-safe slug from a character name
+ * Examples: "Briv" → "briv", "Gandalf the Grey" → "gandalf-the-grey"
+ */
+export function generateSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
+    .replace(/\s+/g, '-') // Spaces to hyphens
+    .replace(/-+/g, '-') // Multiple hyphens to single
+    .replace(/^-+|-+$/g, ''); // Trim hyphens from start/end
 }
