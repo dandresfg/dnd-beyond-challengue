@@ -14,6 +14,9 @@ export const CharacterInfoCard = () => {
 
     if (!player) return null;
 
+    const classesLabel = player.classes.map(cls => cls.name).join(', ')
+    const defensesLabel = player.defenses.map(d => d.type).join(', ')
+
     return (
         <Card>
             <Flex direction={isLargeDesktop ? "row" : "column"} grow={1} gap={3} className={styles.content}>
@@ -33,16 +36,16 @@ export const CharacterInfoCard = () => {
                             </Flex>
                             {isLargeDesktop && (
                                 <Flex direction="column" gap={1} grow={1}>
-                                    <InfoRow label="Classes:" value={player.classes.map(cls => cls.name).join(', ')} />
-                                    <InfoRow label="Defenses:" value={player.defenses.map(d => d.type).join(', ')} />
+                                    <InfoRow label="Classes:" value={classesLabel} />
+                                    <InfoRow label="Defenses:" value={defensesLabel} />
                                 </Flex>
                             )}
                         </Flex>
 
                         {!isLargeDesktop && (
                             <Flex direction="column" gap={1}>
-                                <InfoRow label="Classes:" value={player.classes.map(cls => cls.name).join(', ')} />
-                                <InfoRow label="Defenses:" value={player.defenses.map(d => d.type).join(', ')} />
+                                <InfoRow label="Classes:" value={classesLabel} />
+                                <InfoRow label="Defenses:" value={defensesLabel} />
                             </Flex>
                         )}
 

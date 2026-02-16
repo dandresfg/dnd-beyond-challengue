@@ -25,6 +25,15 @@
   font-family: 'Courier New', monospace;
 }
 
+@media screen and (max-width: 768px) {
+  .label {
+    font-size: 0.75rem;
+  }
+  .value {
+    font-size: 0.9rem;
+  }
+}
+
 .body {
   font-size: 1rem;
   color: #d4d4d8;

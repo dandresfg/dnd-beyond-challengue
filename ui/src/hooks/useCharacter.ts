@@ -12,7 +12,6 @@ export const useCharacter = (slug = 'briv') => {
 }
 
 export const mutatePlayer = (slug: string, character?: ICharacter) => {
-    console.log('mutating player', slug, character, { revalidate: !character })
     mutate(`/characters/${slug}`, character, {
         revalidate: !character
     })

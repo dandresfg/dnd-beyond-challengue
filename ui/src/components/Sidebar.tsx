@@ -38,7 +38,6 @@ export const Sidebar = ({ logs }: SidebarProps) => {
             </Flex>
             <div
                 className={styles.content}
-                tabIndex={0}
                 role="log"
                 aria-live="polite"
                 aria-atomic="false"
@@ -48,7 +47,13 @@ export const Sidebar = ({ logs }: SidebarProps) => {
                 ) : (
                     <Flex direction="column" gap={2}>
                         {logs.map((log) => (
-                            <div key={log.id} className={`${styles.logEntry} ${getLogColor(log.type)}`}>
+                            <div 
+                                key={log.id} 
+                                className={`${styles.logEntry} ${getLogColor(log.type)}`}
+                                tabIndex={0}
+                                role="article"
+                                aria-label={`${log.type} log entry: ${log.message}`}
+                            >
                                 <Flex direction="row" align="center" gap={1} className={styles.logHeader}>
                                     <Text variant="label" className={styles.logTime}>{formatTime(log.timestamp)}</Text>
                                 </Flex>

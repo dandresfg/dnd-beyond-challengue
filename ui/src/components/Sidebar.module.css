@@ -79,6 +79,12 @@
     background: #27272a;
 }
 
+.logEntry:focus {
+    outline: 2px solid #d97706;
+    outline-offset: 2px;
+    background: #27272a;
+}
+
 .attackLog {
     border-left-color: #ef4444;
 }

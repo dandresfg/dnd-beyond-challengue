@@ -56,6 +56,21 @@ export const ActionBar = ({ onAttackStart, onHealStart }: ActionBarProps) => {
         }
     };
 
+    const handleAttackSubmit = (e: React.SubmitEvent) => {
+        e.preventDefault();
+        handleAttack();
+    };
+
+    const handleHealSubmit = (e: React.SubmitEvent) => {
+        e.preventDefault();
+        handleHeal();
+    };
+
+    const handleTempHpSubmit = (e: React.SubmitEvent) => {
+        e.preventDefault();
+        handleAddTempHp();
+    };
+
     return (
         <Card>
             <Flex direction="row" align="center" gap={1} className={styles.header}>
@@ -64,85 +79,91 @@ export const ActionBar = ({ onAttackStart, onHealStart }: ActionBarProps) => {
 
             <Flex direction="row" gap={2} wrap className={styles.actionsContainer}>
                 {/* Attack Input */}
-                <Flex direction="column" gap={1} className={styles.inputGroup}>
-                    <Text variant="label" className={styles.inputLabel}>Attacking</Text>
-                    <Flex direction="row" className={styles.inputWrapper}>
-                        <input
-                            type="number"
-                            value={attackAmount}
-                            onChange={(e) => setAttackAmount(Number(e.target.value))}
-                            className={styles.input}
-                            min="0"
-                            aria-label="Attack damage amount"
-                        />
+                <form onSubmit={handleAttackSubmit} className={styles.inputGroup}>
+                    <Flex direction="column" gap={1}>
+                        <Text variant="label" className={styles.inputLabel}>Attacking</Text>
+                        <Flex direction="row" className={styles.inputWrapper}>
+                            <input
+                                type="number"
+                                value={attackAmount}
+                                onChange={(e) => setAttackAmount(Number(e.target.value))}
+                                className={styles.input}
+                                min="0"
+                                aria-label="Attack damage amount"
+                            />
+                        </Flex>
+                        <select
+                            value={damageType}
+                            onChange={(e) => setDamageType(e.target.value as DamageType)}
+                            className={styles.select}
+                            aria-label="Damage type"
+                        >
+                            {Object.values(DamageType).map((type) => (
+                                <option key={type} value={type}>
+                                    {type.charAt(0).toUpperCase() + type.slice(1)}
+                                </option>
+                            ))}
+                        </select>
+                        <button
+                            type="submit"
+                            className={`${styles.button} ${styles.buttonDamage}`}
+                            aria-label="Apply damage"
+                            disabled={attackAmount <= 0}
+                        >
+                            Apply Dmg
+                        </button>
                     </Flex>
-                    <select
-                        value={damageType}
-                        onChange={(e) => setDamageType(e.target.value as DamageType)}
-                        className={styles.select}
-                        aria-label="Damage type"
-                    >
-                        {Object.values(DamageType).map((type) => (
-                            <option key={type} value={type}>
-                                {type.charAt(0).toUpperCase() + type.slice(1)}
-                            </option>
-                        ))}
-                    </select>
-                    <button
-                        onClick={handleAttack}
-                        className={`${styles.button} ${styles.buttonDamage}`}
-                        aria-label="Apply damage"
-                        disabled={attackAmount <= 0}
-                    >
-                        <span>Apply Dmg</span>
-                    </button>
-                </Flex>
+                </form>
 
                 {/* Heal Input */}
-                <Flex direction="column" gap={1} className={styles.inputGroup}>
-                    <Text variant="label" className={styles.inputLabel}>Heal</Text>
-                    <Flex direction="row" className={styles.inputWrapper}>
-                        <input
-                            type="number"
-                            value={healAmount}
-                            onChange={(e) => setHealAmount(Number(e.target.value))}
-                            className={styles.input}
-                            min="0"
-                            aria-label="Heal amount"
-                        />
+                <form onSubmit={handleHealSubmit} className={styles.inputGroup}>
+                    <Flex direction="column" gap={1}>
+                        <Text variant="label" className={styles.inputLabel}>Heal</Text>
+                        <Flex direction="row" className={styles.inputWrapper}>
+                            <input
+                                type="number"
+                                value={healAmount}
+                                onChange={(e) => setHealAmount(Number(e.target.value))}
+                                className={styles.input}
+                                min="0"
+                                aria-label="Heal amount"
+                            />
+                        </Flex>
+                        <button
+                            type="submit"
+                            className={`${styles.button} ${styles.buttonHeal}`}
+                            aria-label="Apply healing"
+                            disabled={healAmount <= 0}
+                        >
+                            Heal
+                        </button>
                     </Flex>
-                    <button
-                        onClick={handleHeal}
-                        className={`${styles.button} ${styles.buttonHeal}`}
-                        aria-label="Apply healing"
-                        disabled={healAmount <= 0}
-                    >
-                        <span>Heal</span>
-                    </button>
-                </Flex>
+                </form>
 
                 {/* Temp HP Input */}
-                <Flex direction="column" gap={1} className={styles.inputGroup}>
-                    <Text variant="label" className={styles.inputLabel}>Temp HP</Text>
-                    <Flex direction="row" className={styles.inputWrapper}>
-                        <input
-                            type="number"
-                            value={tempHpAmount}
-                            onChange={(e) => setTempHpAmount(Number(e.target.value))}
-                            className={styles.input}
-                            min="0"
-                            aria-label="Temporary HP amount"
-                        />
+                <form onSubmit={handleTempHpSubmit} className={styles.inputGroup}>
+                    <Flex direction="column" gap={1}>
+                        <Text variant="label" className={styles.inputLabel}>Temp HP</Text>
+                        <Flex direction="row" className={styles.inputWrapper}>
+                            <input
+                                type="number"
+                                value={tempHpAmount}
+                                onChange={(e) => setTempHpAmount(Number(e.target.value))}
+                                className={styles.input}
+                                min="0"
+                                aria-label="Temporary HP amount"
+                            />
+                        </Flex>
+                        <button
+                            type="submit"
+                            className={`${styles.button} ${styles.buttonTemp}`}
+                            aria-label="Add temporary HP"
+                            disabled={tempHpAmount <= 0}
+                        >
+                            Add Temp
+                        </button>
                     </Flex>
-                    <button
-                        onClick={handleAddTempHp}
-                        className={`${styles.button} ${styles.buttonTemp}`}
-                        aria-label="Add temporary HP"
-                        disabled={tempHpAmount <= 0}
-                    >
-                        <span>Add Temp</span>
-                    </button>
-                </Flex>
+                </form>
             </Flex>
         </Card>
     );
