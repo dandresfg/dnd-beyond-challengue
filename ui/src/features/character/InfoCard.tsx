@@ -23,7 +23,7 @@ export const CharacterInfoCard = () => {
                 <StatsBanner stats={player.stats} isHorizontal={!isLargeDesktop} />
 
                 <Flex direction={!isLargeDesktop ? "column" : "row"} grow={1} gap={3} align={!isLargeDesktop ? "center" : "center"}>
-                    <Avatar src={`${player.slug}.png`} alt={player.name} />
+                    <Avatar src={`https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/${player.slug}.png`} alt={player.name} />
 
                     <Flex direction="column" gap={2} grow={1} style={{ width: '100%' }}>
                         <Text variant="h2">{player.name}</Text>

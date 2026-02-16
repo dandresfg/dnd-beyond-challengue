@@ -77,12 +77,12 @@ export const ActionBar = ({ onAttackStart, onHealStart }: ActionBarProps) => {
                 <Text variant="label" className={styles.headerText}>Quick Actions</Text>
             </Flex>
 
-            <Flex direction="row" gap={2} wrap className={styles.actionsContainer}>
-                {/* Attack Input */}
+            {/* Attack Input */}
+            <Flex direction="row">
                 <form onSubmit={handleAttackSubmit} className={styles.inputGroup}>
-                    <Flex direction="column" gap={1}>
-                        <Text variant="label" className={styles.inputLabel}>Attacking</Text>
-                        <Flex direction="row" className={styles.inputWrapper}>
+                    <Text variant="label" className={styles.inputLabel}>Attacking</Text>
+                    <Flex direction="row" grow={1} gap={1} wrap>
+                        <Flex direction="row" grow={1} className={styles.inputWrapper}>
                             <input
                                 type="number"
                                 value={attackAmount}
@@ -92,18 +92,21 @@ export const ActionBar = ({ onAttackStart, onHealStart }: ActionBarProps) => {
                                 aria-label="Attack damage amount"
                             />
                         </Flex>
-                        <select
-                            value={damageType}
-                            onChange={(e) => setDamageType(e.target.value as DamageType)}
-                            className={styles.select}
-                            aria-label="Damage type"
-                        >
-                            {Object.values(DamageType).map((type) => (
-                                <option key={type} value={type}>
-                                    {type.charAt(0).toUpperCase() + type.slice(1)}
-                                </option>
-                            ))}
-                        </select>
+                        <label htmlFor="damage-type-select" className="sr-only">Damage type</label>
+                        <Flex direction="row" grow={1} className={styles.inputWrapper}>
+                            <select
+                                id="damage-type-select"
+                                value={damageType}
+                                onChange={(e) => setDamageType(e.target.value as DamageType)}
+                                className={styles.select}
+                            >
+                                {Object.values(DamageType).map((type) => (
+                                    <option key={type} value={type}>
+                                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                                    </option>
+                                ))}
+                            </select>
+                        </Flex>
                         <button
                             type="submit"
                             className={`${styles.button} ${styles.buttonDamage}`}
@@ -114,7 +117,11 @@ export const ActionBar = ({ onAttackStart, onHealStart }: ActionBarProps) => {
                         </button>
                     </Flex>
                 </form>
+            </Flex>
 
+            <br />
+
+            <Flex direction="row" gap={2} wrap className={styles.actionsContainer}>
                 {/* Heal Input */}
                 <form onSubmit={handleHealSubmit} className={styles.inputGroup}>
                     <Flex direction="column" gap={1}>

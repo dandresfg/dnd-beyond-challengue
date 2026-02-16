@@ -29,7 +29,7 @@ export const HealthBanner = ({ currentHp, maxHp, tempHp }: HealthBannerProps) =>
                 <div
                     className={styles.healthBarFill}
                     style={{ width: `${healthPercentage}%` }}
-                    aria-label={`Current HP: ${currentHp} out of ${maxHp}`}
+                    aria-label={`Current HP: ${currentHp} (+${tempHp} Temp) out of ${maxHp}`}
                 ></div>
                 {tempHp > 0 && (
                     <div
@@ -38,7 +38,7 @@ export const HealthBanner = ({ currentHp, maxHp, tempHp }: HealthBannerProps) =>
                             left: `${healthPercentage}%`,
                             width: `${tempHpPercentage}%`
                         }}
-                        aria-label={`Temporary HP: ${tempHp}`}
+                        aria-hidden="true"
                     ></div>
                 )}
             </div>

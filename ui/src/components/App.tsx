@@ -25,12 +25,14 @@ function App() {
     <>
       {attackInfo && (
         <AttackBanner
+          key={`${attackInfo.damageType}-${attackInfo.amount}`}
           {...attackInfo}
           onComplete={handleAttackComplete}
         />
       )}
       {healInfo && (
         <HealBanner
+          key={`${healInfo.type}-${healInfo.amount}`}
           {...healInfo}
           onComplete={handleHealComplete}
         />

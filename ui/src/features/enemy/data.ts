@@ -1,11 +1,10 @@
 import { Enemy, DamageType } from "@/types";
 
 export const ENEMIES: Enemy[] = [
-    // --- Basic Enemies ---
     {
         id: 'e1',
         name: 'Griznak the Severer',
-        avatarUrl: '/assets/npc-1.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-1.png',
         damageType: DamageType.SLASHING,
         attackName: 'Jagged Scimitar',
         minDamage: 5,
@@ -14,7 +13,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'e2',
         name: 'Ignis, Ember of the Void',
-        avatarUrl: '/assets/npc-2.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-2.png',
         damageType: DamageType.FIRE,
         attackName: 'Hellfire Burst',
         minDamage: 8,
@@ -23,7 +22,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'e3',
         name: 'Vorlag, Shadow of Winter',
-        avatarUrl: '/assets/npc-3.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-3.png',
         damageType: DamageType.COLD,
         attackName: 'Touch of the Grave',
         minDamage: 4,
@@ -32,7 +31,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'e4',
         name: 'Viper, the Silent Arrow',
-        avatarUrl: '/assets/npc-4.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-4.png',
         damageType: DamageType.PIERCING,
         attackName: 'Poisoned Bolt',
         minDamage: 6,
@@ -41,7 +40,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'e5',
         name: 'Horgar Stone-Fist',
-        avatarUrl: '/assets/npc-5.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-5.png',
         damageType: DamageType.BLUDGEONING,
         attackName: 'Earthshatter Smash',
         minDamage: 7,
@@ -50,7 +49,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'e6',
         name: 'Stormcaller Zyx',
-        avatarUrl: '/assets/npc-6.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-6.png',
         damageType: DamageType.LIGHTNING,
         attackName: 'Chain Lightning',
         minDamage: 5,
@@ -59,7 +58,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'e7',
         name: 'Globulus the Corrosive',
-        avatarUrl: '/assets/npc-7.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-7.png',
         damageType: DamageType.ACID,
         attackName: 'Dissolving Spray',
         minDamage: 4,
@@ -68,7 +67,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'e8',
         name: 'Zorath the Whisperer',
-        avatarUrl: '/assets/npc-8.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-8.png',
         damageType: DamageType.PSYCHIC,
         attackName: 'Mind Shatter',
         minDamage: 6,
@@ -77,7 +76,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'e9',
         name: 'Lady Mortis',
-        avatarUrl: '/assets/npc-9.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-9.png',
         damageType: DamageType.NECROTIC,
         attackName: 'Vampiric Drain',
         minDamage: 5,
@@ -86,7 +85,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'e10',
         name: 'Construct Alpha-9',
-        avatarUrl: '/assets/npc-10.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-10.png',
         damageType: DamageType.FORCE,
         attackName: 'Arcane Missiles',
         minDamage: 3,
@@ -95,7 +94,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'b1',
         name: 'Cindermaw the Eruptor',
-        avatarUrl: '/assets/Boss-11.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/boss-11.png',
         damageType: DamageType.FIRE,
         attackName: 'Magma Breath',
         minDamage: 15,
@@ -104,7 +103,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'b2',
         name: 'Cryonax the Glacial Tyrant',
-        avatarUrl: '/assets/Boss-12.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/boss-12.png',
         damageType: DamageType.COLD,
         attackName: 'Flash Freeze',
         minDamage: 12,
@@ -113,7 +112,7 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'b3',
         name: "The Bleeding Beast, Nature's Fury",
-        avatarUrl: '/assets/Boss-13.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/boss-13.png',
         damageType: DamageType.SLASHING,
         attackName: 'Primal Maul',
         minDamage: 16,
@@ -122,17 +121,16 @@ export const ENEMIES: Enemy[] = [
     {
         id: 'b4',
         name: "K'thul, The Slumbering Terror",
-        avatarUrl: '/assets/Boss-14.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/boss-14.png',
         damageType: DamageType.PSYCHIC,
         attackName: 'Cosmic Madness',
         minDamage: 18,
         maxDamage: 34,
     },
-    // --- Final Boss ---
     {
         id: 'b5',
         name: "The Void-Anchor's Core",
-        avatarUrl: '/assets/Boss-15.png',
+        avatarUrl: 'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/boss-15.png',
         damageType: DamageType.FORCE,
         attackName: 'Reality Fracture',
         minDamage: 18,
