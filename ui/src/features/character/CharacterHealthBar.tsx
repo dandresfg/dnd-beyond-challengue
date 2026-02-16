@@ -23,7 +23,7 @@ export function CharacterHealthBar({
   ].filter((s) => s.value > 0);
 
   return (
-    <Paper p="md" radius="md" withBorder bg="blue.9">
+    <Paper p="md" radius="md" withBorder bg="dark.6">
       <Group justify="space-between" mb="xs">
         <div>
           <Text size="xs" c="dimmed" tt="uppercase" fw={700} mb={4}>
@@ -58,7 +58,7 @@ export function CharacterHealthBar({
             <Progress.Section key={i} value={s.value} color={s.color} />
           ))
         ) : (
-          <Progress.Section value={0} color="blue.8" />
+          <Progress.Section value={0} color="dark.5" />
         )}
       </Progress.Root>
       <Group justify="space-between" mt="xs">

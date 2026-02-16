@@ -44,47 +44,43 @@ function App() {
           buttonLabel={mockPhase.buttonLabel}
           onButtonClick={() => {}}
         />
-        <Grid>
-          <Grid.Col span={{ base: 12, md: 8 }}>
-            <Stack gap="md">
-              <Grid>
-                <Grid.Col span={{ base: 12, sm: 8 }}>
-                  <CharacterInfoCard
-                    name={mockCharacter.name}
-                    subtitle={mockCharacter.subtitle}
-                    level={mockCharacter.level}
-                    portraitUrl={mockCharacter.portraitUrl}
-                    ac={mockCharacter.ac}
-                    resistances={mockCharacter.resistances}
-                    badges={mockCharacter.badges}
-                  />
-                </Grid.Col>
-                <Grid.Col span={{ base: 12, sm: 4 }}>
-                  <ThreatCard
-                    name={mockThreat.name}
-                    damageType={mockThreat.damageType}
-                    hasResistance={mockThreat.hasResistance}
-                    subtitle={mockThreat.subtitle}
-                  />
-                </Grid.Col>
-              </Grid>
-              <CharacterHealthBar
-                currentHp={mockCharacter.currentHp}
-                maxHp={mockCharacter.maxHp}
-                tempHp={mockCharacter.tempHp}
-                label={mockCharacter.label}
+        <Stack gap="md">
+          <Grid>
+            <Grid.Col span={{ base: 12, sm: 8 }}>
+              <CharacterInfoCard
+                name={mockCharacter.name}
+                subtitle={mockCharacter.subtitle}
+                level={mockCharacter.level}
+                portraitUrl={mockCharacter.portraitUrl}
+                ac={mockCharacter.ac}
+                resistances={mockCharacter.resistances}
+                badges={mockCharacter.badges}
               />
-              <PrepActionCard
-                isUserTurn={mockPrep.isUserTurn}
-                prepAmount={prepAmount}
-                onPrepAmountChange={setPrepAmount}
-                onHeal={() => {}}
-                onAddTempHp={() => {}}
-                quickPrepLabels={mockPrep.quickPrepLabels}
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, sm: 4 }}>
+              <ThreatCard
+                name={mockThreat.name}
+                damageType={mockThreat.damageType}
+                hasResistance={mockThreat.hasResistance}
+                subtitle={mockThreat.subtitle}
               />
-            </Stack>
-          </Grid.Col>
-        </Grid>
+            </Grid.Col>
+          </Grid>
+          <CharacterHealthBar
+            currentHp={mockCharacter.currentHp}
+            maxHp={mockCharacter.maxHp}
+            tempHp={mockCharacter.tempHp}
+            label={mockCharacter.label}
+          />
+          <PrepActionCard
+            isUserTurn={mockPrep.isUserTurn}
+            prepAmount={prepAmount}
+            onPrepAmountChange={setPrepAmount}
+            onHeal={() => {}}
+            onAddTempHp={() => {}}
+            quickPrepLabels={mockPrep.quickPrepLabels}
+          />
+        </Stack>
       </Stack>
     </Container>
   );

@@ -12,7 +12,7 @@ export function BattleLogSidebar({ children }: BattleLogSidebarProps) {
         gap="xs"
         style={{
           borderBottom: '1px solid var(--mantine-color-default-border)',
-          backgroundColor: 'var(--mantine-color-blue-9)',
+          backgroundColor: 'var(--mantine-color-dark-6)',
         }}
       >
         <Text fw={700} size="sm" tt="uppercase" c="dimmed">
@@ -27,7 +27,7 @@ export function BattleLogSidebar({ children }: BattleLogSidebarProps) {
         p="md"
         style={{
           borderTop: '1px solid var(--mantine-color-default-border)',
-          backgroundColor: 'var(--mantine-color-blue-9)',
+          backgroundColor: 'var(--mantine-color-dark-6)',
         }}
       >
         <Text size="xs" c="dimmed" ta="center">

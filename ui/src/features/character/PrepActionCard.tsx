@@ -27,7 +27,7 @@ export function PrepActionCard({
   quickPrepLabels = [],
 }: PrepActionCardProps) {
   return (
-    <Paper p="md" radius="md" withBorder bg="blue.9" pos="relative">
+    <Paper p="md" radius="md" withBorder bg="dark.6" pos="relative">
       {isUserTurn && (
         <Badge
           size="sm"
