@@ -53,11 +53,12 @@ export interface ICharacter {
     name: string;
     slug: string;
     level: number;
-    hitPoints: number; // Max HP from JSON
-    currentHp: number; // Runtime state
-    tempHp: number; // Temporary hit points
+    hitPoints: number;
+    currentHp: number;
+    tempHp: number;
     classes: IClass[];
     stats: IStats;
     items: IItem[];
     defenses: IDefense[];
+    isAlive: boolean;
 }

@@ -1,5 +1,5 @@
 import useSWR from "swr"
-import { fetcher } from "../components/api"
+import { fetcher } from "@config/api"
 import { ICharacter } from "@/types"
 
 export const useCharacter = (slug = 'briv') => {
