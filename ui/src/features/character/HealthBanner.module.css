@@ -4,6 +4,9 @@
     padding-top: 8px;
     margin-top: 8px;
     position: relative;
+    margin-bottom: -22px;
+    margin-left: -22px;
+    margin-right: -22px;
 }
 
 .healthLabel {

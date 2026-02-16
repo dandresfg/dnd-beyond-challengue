@@ -20,5 +20,6 @@
 
     .contentArea {
         overflow-y: visible;
+        padding: 16px 0px;
     }
 }

@@ -19,6 +19,15 @@ export enum DefenseType {
     RESISTANCE = 'resistance',
 }
 
+export interface Enemy {
+    id: string;
+    name: string;
+    avatarUrl: string;
+    damageType: DamageType;
+    attackName: string;
+    minDamage: number;
+    maxDamage: number;
+}
 export interface IClass {
     name: string;
     hitDiceValue: number;

@@ -6,6 +6,7 @@ import { Flex, FlexProps } from "@/components/Flex";
 import { Text } from "@/components/Text";
 import { useBreakpoint } from "@hooks/useMediaQuery";
 import styles from "./InfoCard.module.css";
+import { Card } from "@/components/Card";
 
 export const CharacterInfoCard = () => {
     const { player } = useCharacter();
@@ -14,9 +15,7 @@ export const CharacterInfoCard = () => {
     if (!player) return null;
 
     return (
-        <Flex direction="column" className={styles.card}>
-            <div className={styles.innerBorder}></div>
-
+        <Card>
             <Flex direction={isLargeDesktop ? "row" : "column"} grow={1} gap={3} className={styles.content}>
                 <StatsBanner stats={player.stats} isHorizontal={!isLargeDesktop} />
 
@@ -62,7 +61,7 @@ export const CharacterInfoCard = () => {
                 maxHp={player.hitPoints}
                 tempHp={player.tempHp}
             />
-        </Flex>
+        </Card>
     )
 }
 

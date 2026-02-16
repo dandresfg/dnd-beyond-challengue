@@ -61,8 +61,78 @@
     outline-offset: -2px;
 }
 
+.emptyState {
+    color: #52525b;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.logEntry {
+    background: #1f1f23;
+    border-radius: 8px;
+    padding: 12px;
+    border-left: 3px solid;
+    transition: background 0.2s;
+}
+
+.logEntry:hover {
+    background: #27272a;
+}
+
+.attackLog {
+    border-left-color: #ef4444;
+}
+
+.healLog {
+    border-left-color: #4ade80;
+}
+
+.tempLog {
+    border-left-color: #fb923c;
+}
+
+.logHeader {
+    margin-bottom: 4px;
+}
+
+.logIcon {
+    font-size: 16px;
+}
+
+.logTime {
+    font-size: 1rem;
+    color: #71717a;
+    font-family: 'Courier New', monospace;
+    text-transform: none;
+}
+
+.enemyInfo {
+    margin: 6px 0;
+}
+
+.enemyAvatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid rgba(239, 68, 68, 0.4);
+    object-fit: cover;
+}
+
+.enemyName {
+    font-size: 0.75rem;
+    color: #fbbf24;
+    font-weight: bold;
+    text-transform: none;
+}
+
+.logMessage {
+    color: #d4d4d8;
+    font-size: 0.875rem;
+}
+
 @media (max-width: 1024px) {
     .content {
         min-height: 300px;
     }
 }
+
