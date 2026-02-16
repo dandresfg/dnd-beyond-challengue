@@ -1,24 +1,21 @@
-import type { Character } from '../api/client';
-import type { CharacterState } from '../types/game';
+import type { Character } from '../types/character';
 
 function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
-export function apiCharacterToCharacterState(c: Character): CharacterState {
-  const resistances =
-    (c.defenses as { type: string; defense: string }[])
-      ?.filter((d) => d.defense === 'resistance')
-      .map((d) => capitalize(d.type)) ?? [];
+function subtitleFromClasses(
+  classes: { name: string; classLevel: number }[],
+): string | undefined {
+  if (!classes?.length) return undefined;
+  return classes
+    .map((c) => `${capitalize(c.name)} ${c.classLevel}`)
+    .join(' / ');
+}
 
+export function apiCharacterToCharacterState(c: Character): Character {
   return {
-    name: c.name,
-    level: c.level,
-    currentHp: c.currentHp,
-    maxHp: c.hitPoints,
-    tempHp: c.tempHp,
-    resistances,
-    badges: [],
-    label: c.currentHp > c.hitPoints * 0.5 ? 'Healthy' : 'Wounded',
+    ...c,
+    subtitle: subtitleFromClasses(c.classes) ?? '',
   };
 }

@@ -1,30 +1,28 @@
 import { Avatar, Badge, Box, Group, Paper, Stack, Text } from '@mantine/core';
-import { IconShield, IconFlame, IconBulb } from '@tabler/icons-react';
-
-interface CharacterInfoCardProps {
-  name: string;
-  subtitle?: string;
-  level?: number;
-  portraitUrl?: string;
-  ac?: number;
-  resistances?: string[];
-  badges?: string[];
-}
+import { IconBackpack, IconShield } from '@tabler/icons-react';
+import { CharacterStats as CharacterStatsComponent } from './CharacterStats';
+import { Character } from '../../types/character';
 
 export function CharacterInfoCard({
   name,
   subtitle,
   level,
-  portraitUrl,
-  ac,
-  resistances = [],
-  badges = [],
-}: CharacterInfoCardProps) {
+  items = [],
+  defenses = [],
+  stats,
+}: Character) {
   return (
-    <Paper p="md" radius="md" withBorder bg="dark.6" h={'100%'}>
-      <Group align="flex-start" wrap="nowrap">
+    <Paper p="md" radius="md" withBorder bg="dark.6" h="100%">
+      <Text variant="h5">Character Info</Text>
+      <Group align="flex-start" wrap="nowrap" gap="md" mt={8}>
         <Box pos="relative" style={{ flexShrink: 0 }}>
-          <Avatar src={portraitUrl} alt={name} size={80} radius="md">
+          <Avatar
+            src={'/assets/player.png'}
+            alt={name}
+            size={96}
+            radius="md"
+            style={{ border: '1px solid var(--mantine-color-dark-4)' }}
+          >
             {name.slice(0, 2).toUpperCase()}
           </Avatar>
           {level != null && (
@@ -35,16 +33,24 @@ export function CharacterInfoCard({
               pos="absolute"
               bottom={-4}
               right={-4}
-              style={{ border: '2px solid var(--mantine-color-dark-6)' }}
+              style={{
+                border: '2px solid var(--mantine-color-dark-6)',
+                borderRadius: 6,
+              }}
             >
               LVL {level}
             </Badge>
           )}
         </Box>
-        <Stack gap="xs" style={{ flex: 1, minWidth: 0 }}>
-          <Group justify="space-between" wrap="wrap" align="flex-start">
-            <div>
-              <Text fw={700} size="xl">
+        <Stack gap="sm" style={{ flex: 1, minWidth: 0 }}>
+          <Group
+            justify="space-between"
+            wrap="wrap"
+            align="flex-start"
+            gap="xs"
+          >
+            <Stack gap={2}>
+              <Text fw={700} size="xl" c="white">
                 {name}
               </Text>
               {subtitle && (
@@ -52,72 +58,60 @@ export function CharacterInfoCard({
                   {subtitle}
                 </Text>
               )}
-            </div>
-            {badges.length > 0 && (
-              <Group gap="xs">
-                {badges.map((b) => (
-                  <Badge
-                    key={b}
-                    size="sm"
-                    variant="light"
-                    color="yellow"
-                    leftSection={<IconBulb size={12} />}
-                    styles={{
-                      root: {
-                        backgroundColor: 'rgba(251, 191, 36, 0.1)',
-                        border: '1px solid rgba(251, 191, 36, 0.2)',
-                      },
-                    }}
-                  >
-                    {b}
-                  </Badge>
-                ))}
-              </Group>
-            )}
+            </Stack>
+            <CharacterStatsComponent stats={stats} />
           </Group>
           <Group gap="md">
-            {ac != null && (
+            {defenses.length > 0 && (
               <Group
                 gap="xs"
                 p="xs"
+                align="center"
                 style={{
                   backgroundColor: 'var(--mantine-color-dark-5)',
                   borderRadius: 'var(--mantine-radius-md)',
                   border: '1px solid var(--mantine-color-dark-4)',
                 }}
               >
-                <Box c="dimmed">
-                  <IconShield size={20} />
-                </Box>
-                <Stack gap={0}>
-                  <Text size="xs" c="dimmed" tt="uppercase" fw={700}>
-                    AC
-                  </Text>
-                  <Text fw={700} size="lg">
-                    {ac}
-                  </Text>
-                </Stack>
-              </Group>
-            )}
-            {resistances.length > 0 && (
-              <Group
-                gap="xs"
-                p="xs"
-                style={{
-                  backgroundColor: 'var(--mantine-color-dark-5)',
-                  borderRadius: 'var(--mantine-radius-md)',
-                  border: '1px solid var(--mantine-color-dark-4)',
-                }}
-              >
-                <Box c="dimmed">
-                  <IconFlame size={20} />
+                <Box
+                  c="gray.4"
+                  style={{ display: 'flex', alignItems: 'center' }}
+                >
+                  <IconShield size={30} />
                 </Box>
                 <Stack gap={0}>
                   <Text size="xs" c="dimmed" tt="uppercase" fw={700}>
                     Resistances
                   </Text>
-                  <Text size="sm" fw={500}>
-                    {resistances.join(', ')}
+                  <Text size="sm" fw={500} c="white">
+                    {defenses.map((defense) => defense.type).join(', ')}
+                  </Text>
+                </Stack>
+              </Group>
+            )}
+            {items.length > 0 && (
+              <Group
+                gap="xs"
+                p="xs"
+                align="center"
+                style={{
+                  backgroundColor: 'var(--mantine-color-dark-5)',
+                  borderRadius: 'var(--mantine-radius-md)',
+                  border: '1px solid var(--mantine-color-dark-4)',
+                }}
+              >
+                <Box
+                  c="gray.4"
+                  style={{ display: 'flex', alignItems: 'center' }}
+                >
+                  <IconBackpack size={30} />
+                </Box>
+                <Stack gap={0}>
+                  <Text size="xs" c="dimmed" tt="uppercase" fw={700}>
+                    Items
+                  </Text>
+                  <Text size="sm" fw={500} c="white">
+                    {items.map((item) => item.name).join(', ')}
                   </Text>
                 </Stack>
               </Group>

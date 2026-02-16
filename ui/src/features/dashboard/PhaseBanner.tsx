@@ -2,18 +2,10 @@ import { Box, Button, Group, Stack, Text } from '@mantine/core';
 import { IconHourglass, IconArrowsRight } from '@tabler/icons-react';
 
 interface PhaseBannerProps {
-  title: string;
-  description: string;
-  buttonLabel: string;
   onButtonClick: () => void;
 }
 
-export function PhaseBanner({
-  title,
-  description,
-  buttonLabel,
-  onButtonClick,
-}: PhaseBannerProps) {
+export function PhaseBanner({ onButtonClick }: PhaseBannerProps) {
   return (
     <Box
       p="md"
@@ -30,10 +22,10 @@ export function PhaseBanner({
           </Box>
           <Stack gap={4}>
             <Text fw={700} size="lg" c="yellow.5">
-              {title}
+              Tactical Prep Phase
             </Text>
             <Text size="sm" c="dimmed">
-              {description}
+              Wave cleared. Prepare for the next encounter.
             </Text>
           </Stack>
         </Group>
@@ -49,7 +41,7 @@ export function PhaseBanner({
             },
           }}
         >
-          {buttonLabel}
+          Start Next Wave
         </Button>
       </Group>
     </Box>

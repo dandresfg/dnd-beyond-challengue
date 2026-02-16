@@ -7,12 +7,19 @@ import {
   Stack,
   Text,
 } from '@mantine/core';
-import { IconHeart, IconShield, IconDroplet } from '@tabler/icons-react';
+import {
+  IconHeart,
+  IconShield,
+  IconDroplet,
+  IconSword,
+} from '@tabler/icons-react';
 
 interface PrepActionCardProps {
   isUserTurn: boolean;
+  isPrepPhase: boolean;
   prepAmount: number;
   onPrepAmountChange: (n: number) => void;
+  onAttack?: () => void;
   onHeal?: () => void;
   onAddTempHp?: () => void;
   quickPrepLabels?: string[];
@@ -20,12 +27,16 @@ interface PrepActionCardProps {
 
 export function PrepActionCard({
   isUserTurn,
+  isPrepPhase,
   prepAmount,
   onPrepAmountChange,
+  onAttack,
   onHeal,
   onAddTempHp,
   quickPrepLabels = [],
 }: PrepActionCardProps) {
+  const badgeLabel = isPrepPhase ? 'YOUR TURN: PREP' : 'YOUR TURN';
+
   return (
     <Paper p="md" radius="md" withBorder bg="dark.6" pos="relative">
       {isUserTurn && (
@@ -37,7 +48,7 @@ export function PrepActionCard({
           top={-12}
           left="md"
         >
-          YOUR TURN: PREP
+          {badgeLabel}
         </Badge>
       )}
       <Stack gap="md" pt={isUserTurn ? 'xs' : 0}>
@@ -55,6 +66,19 @@ export function PrepActionCard({
             />
           </Stack>
           <Group gap="xs" wrap="nowrap">
+            {!isPrepPhase && (
+              <Button
+                variant="filled"
+                color="red"
+                leftSection={<IconSword size={18} />}
+                onClick={onAttack}
+                style={{ flexDirection: 'column', height: 52 }}
+              >
+                <Text size="xs" fw={700}>
+                  ATTACK
+                </Text>
+              </Button>
+            )}
             <Button
               variant="default"
               color="gray"
@@ -88,7 +112,7 @@ export function PrepActionCard({
             </Button>
           </Group>
         </Group>
-        {quickPrepLabels.length > 0 && (
+        {isPrepPhase && quickPrepLabels.length > 0 && (
           <Group gap="xs" wrap="nowrap" align="center">
             <Text size="xs" c="dimmed">
               Quick Prep:

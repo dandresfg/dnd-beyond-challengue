@@ -1,5 +1,17 @@
 import { DamageType, type Enemy } from '../../types/enemies';
 
+export function getEnemyForWave(wave: number): Enemy {
+  if (wave <= 10) {
+    return ENEMIES[wave - 1];
+  }
+  return BOSSES[Math.floor(Math.random() * BOSSES.length)];
+}
+
+export function damageTypeToDisplay(dt: DamageType | string): string {
+  const str = String(dt);
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 export const ENEMIES: Enemy[] = [
   // --- Basic Enemies ---
   {

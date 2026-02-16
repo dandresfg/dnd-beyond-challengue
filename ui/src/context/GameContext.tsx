@@ -7,36 +7,23 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { ENEMIES, BOSSES, type Enemy } from '../features/enemies/data';
-import { DamageType } from '../features/enemies/data';
-import type { CharacterState, GameState } from '../types/game';
+import { getEnemyForWave, damageTypeToDisplay } from '../features/enemies/data';
+import type { GameState } from '../types/game';
 import { useLog } from './LogContext';
+import { Character } from '../types/character';
 
 const INITIAL_STATE: GameState = {
   gameStatus: 'not-started',
   currentWave: 0,
   turnPhase: 'idle',
-  character: {} as unknown as CharacterState,
+  character: {} as unknown as Character,
   currentEnemy: null,
   enemyCurrentHp: 0,
   waveCleared: false,
 };
 
-function getEnemyForWave(wave: number): Enemy {
-  if (wave <= 10) {
-    const index = wave - 1;
-    return ENEMIES[index];
-  }
-  const bossIndex = Math.floor(Math.random() * BOSSES.length);
-  return BOSSES[bossIndex];
-}
-
-function damageTypeToDisplay(dt: DamageType): string {
-  return dt.charAt(0).toUpperCase() + dt.slice(1).toLowerCase();
-}
-
 interface GameContextValue extends GameState {
-  startGame: (player: CharacterState) => void;
+  startGame: (player: Character) => void;
   resetGame: () => void;
   playerAttack: () => void;
   playerHeal: (amount: number) => void;
@@ -54,7 +41,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   );
 
   const startGame = useCallback(
-    (player: CharacterState) => {
+    (player: Character) => {
       clearLog();
       const enemy = getEnemyForWave(1);
       addEntry({
@@ -161,7 +148,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
         if (prev.turnPhase !== 'idle' || prev.waveCleared) return prev;
         const actualHeal = Math.min(
           amount,
-          prev.character.maxHp - prev.character.currentHp,
+          prev.character.hitPoints - prev.character.currentHp,
         );
         if (actualHeal <= 0) return prev;
 
