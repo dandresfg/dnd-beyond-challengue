@@ -21,7 +21,7 @@ export function CharacterInfoCard({
   badges = [],
 }: CharacterInfoCardProps) {
   return (
-    <Paper p="md" radius="md" withBorder bg="dark.6">
+    <Paper p="md" radius="md" withBorder bg="dark.6" h={'100%'}>
       <Group align="flex-start" wrap="nowrap">
         <Box pos="relative" style={{ flexShrink: 0 }}>
           <Avatar src={portraitUrl} alt={name} size={80} radius="md">

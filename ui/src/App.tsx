@@ -37,7 +37,7 @@ function App() {
         </CombatLog>
       }
     >
-      <Stack gap="md">
+      <Stack gap="lg">
         <PhaseBanner
           title={mockPhase.title}
           description={mockPhase.description}
@@ -46,7 +46,7 @@ function App() {
         />
         <Stack gap="md">
           <Grid>
-            <Grid.Col span={{ base: 12, sm: 8 }}>
+            <Grid.Col span={{ base: 12, sm: 8 }} h={275}>
               <CharacterInfoCard
                 name={mockCharacter.name}
                 subtitle={mockCharacter.subtitle}
@@ -57,7 +57,7 @@ function App() {
                 badges={mockCharacter.badges}
               />
             </Grid.Col>
-            <Grid.Col span={{ base: 12, sm: 4 }}>
+            <Grid.Col span={{ base: 12, sm: 4 }} h={275}>
               <ThreatCard
                 name={mockThreat.name}
                 damageType={mockThreat.damageType}

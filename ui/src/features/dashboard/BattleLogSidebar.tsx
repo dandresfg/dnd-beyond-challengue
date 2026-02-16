@@ -1,4 +1,4 @@
-import { Badge, Box, Stack, Text } from '@mantine/core';
+import { Box, Stack, Text } from '@mantine/core';
 
 interface BattleLogSidebarProps {
   children: React.ReactNode;
@@ -18,9 +18,6 @@ export function BattleLogSidebar({ children }: BattleLogSidebarProps) {
         <Text fw={700} size="sm" tt="uppercase" c="dimmed">
           Battle Log
         </Text>
-        <Badge size="sm" color="yellow" variant="light">
-          READ ONLY
-        </Badge>
       </Stack>
       <Box style={{ flex: 1, minHeight: 0 }}>{children}</Box>
       <Stack
@@ -31,7 +28,7 @@ export function BattleLogSidebar({ children }: BattleLogSidebarProps) {
         }}
       >
         <Text size="xs" c="dimmed" ta="center">
-          Log is locked during Tactical Phase
+          Made with ❤️ by Diego.
         </Text>
       </Stack>
     </Stack>
