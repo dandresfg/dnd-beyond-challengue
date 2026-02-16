@@ -1,0 +1,173 @@
+export enum DamageType {
+  ACID = 'acid',
+  BLUDGEONING = 'bludgeoning',
+  COLD = 'cold',
+  FIRE = 'fire',
+  FORCE = 'force',
+  LIGHTNING = 'lightning',
+  NECROTIC = 'necrotic',
+  PIERCING = 'piercing',
+  POISON = 'poison',
+  PSYCHIC = 'psychic',
+  RADIANT = 'radiant',
+  SLASHING = 'slashing',
+  THUNDER = 'thunder',
+}
+
+export enum DefenseType {
+  IMMUNITY = 'immunity',
+  RESISTANCE = 'resistance',
+}
+
+export interface Enemy {
+  id: string;
+  name: string;
+  avatarUrl: string;
+  damageType: DamageType;
+  attackName: string; // Flavor text for the log
+  minDamage: number;
+  maxDamage: number;
+}
+
+export const ENEMIES: Enemy[] = [
+  // --- Basic Enemies ---
+  {
+    id: 'e1',
+    name: 'Griznak the Severer',
+    avatarUrl: '/assets/npc-1.png',
+    damageType: DamageType.SLASHING,
+    attackName: 'Jagged Scimitar',
+    minDamage: 5,
+    maxDamage: 9,
+  },
+  {
+    id: 'e2',
+    name: 'Ignis, Ember of the Void',
+    avatarUrl: '/assets/npc-2.png',
+    damageType: DamageType.FIRE,
+    attackName: 'Hellfire Burst',
+    minDamage: 8,
+    maxDamage: 16,
+  },
+  {
+    id: 'e3',
+    name: 'Vorlag, Shadow of Winter',
+    avatarUrl: '/assets/npc-3.png',
+    damageType: DamageType.COLD,
+    attackName: 'Touch of the Grave',
+    minDamage: 4,
+    maxDamage: 10,
+  },
+  {
+    id: 'e4',
+    name: 'Viper, the Silent Arrow',
+    avatarUrl: '/assets/npc-4.png',
+    damageType: DamageType.PIERCING,
+    attackName: 'Poisoned Bolt',
+    minDamage: 6,
+    maxDamage: 11,
+  },
+  {
+    id: 'e5',
+    name: 'Horgar Stone-Fist',
+    avatarUrl: '/assets/npc-5.png',
+    damageType: DamageType.BLUDGEONING,
+    attackName: 'Earthshatter Smash',
+    minDamage: 7,
+    maxDamage: 14,
+  },
+  {
+    id: 'e6',
+    name: 'Stormcaller Zyx',
+    avatarUrl: '/assets/npc-6.png',
+    damageType: DamageType.LIGHTNING,
+    attackName: 'Chain Lightning',
+    minDamage: 5,
+    maxDamage: 12,
+  },
+  {
+    id: 'e7',
+    name: 'Globulus the Corrosive',
+    avatarUrl: '/assets/npc-7.png',
+    damageType: DamageType.ACID,
+    attackName: 'Dissolving Spray',
+    minDamage: 4,
+    maxDamage: 9,
+  },
+  {
+    id: 'e8',
+    name: 'Zorath the Whisperer',
+    avatarUrl: '/assets/npc-8.png',
+    damageType: DamageType.PSYCHIC,
+    attackName: 'Mind Shatter',
+    minDamage: 6,
+    maxDamage: 12,
+  },
+  {
+    id: 'e9',
+    name: 'Lady Mortis',
+    avatarUrl: '/assets/npc-9.png',
+    damageType: DamageType.NECROTIC,
+    attackName: 'Vampiric Drain',
+    minDamage: 5,
+    maxDamage: 10,
+  },
+  {
+    id: 'e10',
+    name: 'Construct Alpha-9',
+    avatarUrl: '/assets/npc-10.png',
+    damageType: DamageType.FORCE,
+    attackName: 'Arcane Missiles',
+    minDamage: 3,
+    maxDamage: 7,
+  },
+];
+
+export const BOSSES: Enemy[] = [
+  {
+    id: 'b1',
+    name: 'Cindermaw the Eruptor',
+    avatarUrl: '/assets/Boss-1.png',
+    damageType: DamageType.FIRE,
+    attackName: 'Magma Breath',
+    minDamage: 15,
+    maxDamage: 30,
+  },
+  {
+    id: 'b2',
+    name: 'Cryonax the Glacial Tyrant',
+    avatarUrl: '/assets/Boss-2.png',
+    damageType: DamageType.COLD,
+    attackName: 'Flash Freeze',
+    minDamage: 12,
+    maxDamage: 22,
+  },
+  {
+    id: 'b3',
+    name: "The Bleeding Beast, Nature's Fury",
+    avatarUrl: '/assets/Boss-3.png',
+    damageType: DamageType.SLASHING,
+    attackName: 'Primal Maul',
+    minDamage: 16,
+    maxDamage: 32,
+  },
+  {
+    id: 'b4',
+    name: "K'thul, The Slumbering Terror",
+    avatarUrl: '/assets/Boss-4.png',
+    damageType: DamageType.PSYCHIC,
+    attackName: 'Cosmic Madness',
+    minDamage: 18,
+    maxDamage: 34,
+  },
+  // --- Final Boss ---
+  {
+    id: 'b5',
+    name: "The Void-Anchor's Core",
+    avatarUrl: '/assets/Boss-5.png',
+    damageType: DamageType.FORCE,
+    attackName: 'Reality Fracture',
+    minDamage: 18,
+    maxDamage: 35,
+  },
+];
