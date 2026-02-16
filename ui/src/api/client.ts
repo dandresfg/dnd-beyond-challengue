@@ -1,26 +1,16 @@
 import { ofetch } from 'ofetch';
 
-async function fetcher<T>(url: string): Promise<T> {
-  return ofetch<T>(url, { baseURL: '' });
-}
+const baseURL = 'http://localhost:4321';
 
-export interface Character {
-  id: string;
-  name: string;
-  slug: string;
-  level: number;
-  hitPoints: number;
-  currentHp: number;
-  tempHp: number;
-  classes: unknown[];
-  stats: Record<string, number>;
-  items: unknown[];
-  defenses: unknown[];
-  isAlive: boolean;
+async function post<T>(url: string, body: Record<string, unknown>): Promise<T> {
+  return ofetch<T>(url, { baseURL, method: 'POST', body });
 }
 
 export const api = {
-  getCharacters: (): Promise<Character[]> => fetcher('/characters'),
-  getCharacter: (slug: string): Promise<Character> =>
-    fetcher(`/characters/${slug}`),
+  dealDamage: (slug: string, damageType: string, amount: number) =>
+    post(`/characters/${slug}/damage`, { damageType, amount }),
+  heal: (slug: string, amount: number) =>
+    post(`/characters/${slug}/heal`, { amount }),
+  addTempHp: (slug: string, amount: number) =>
+    post(`/characters/${slug}/temp-hp`, { amount }),
 };

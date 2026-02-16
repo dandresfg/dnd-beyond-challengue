@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createTheme, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
+import { LogProvider } from './context/LogContext';
+import { GameProvider } from './context/GameContext';
 import App from './App';
 
 const theme = createTheme({
@@ -24,7 +26,11 @@ const theme = createTheme({
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <MantineProvider theme={theme} defaultColorScheme="dark">
-      <App />
+      <LogProvider>
+        <GameProvider>
+          <App />
+        </GameProvider>
+      </LogProvider>
     </MantineProvider>
   </React.StrictMode>,
 );

@@ -1,14 +1,16 @@
 import { ScrollArea, Stack } from '@mantine/core';
+import { useLog } from '../../context/LogContext';
+import { CombatLogEntry } from './CombatLogEntry';
 
-interface CombatLogProps {
-  children: React.ReactNode;
-}
+export function CombatLog() {
+  const { entries } = useLog();
 
-export function CombatLog({ children }: CombatLogProps) {
   return (
     <ScrollArea style={{ flex: 1 }} type="auto">
       <Stack gap="md" p="md">
-        {children}
+        {entries.map((entry) => (
+          <CombatLogEntry key={entry.id} entry={entry} />
+        ))}
       </Stack>
     </ScrollArea>
   );
