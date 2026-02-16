@@ -21,24 +21,31 @@ function App() {
     handleHealComplete,
   } = useControls();
 
+  const Banners = (
+    <>
+      {attackInfo && (
+        <AttackBanner
+          {...attackInfo}
+          onComplete={handleAttackComplete}
+        />
+      )}
+      {healInfo && (
+        <HealBanner
+          {...healInfo}
+          onComplete={handleHealComplete}
+        />
+      )}
+    </>
+  )
+
   return (
     <Flex direction="column" className={styles.appContainer}>
       <Navbar />
       <Flex direction={isDesktop ? "row" : "column"} grow={1} className={styles.mainContent}>
         <Flex direction="column" grow={1} className={styles.contentArea}>
-          {attackInfo && (
-            <AttackBanner
-              {...attackInfo}
-              onComplete={handleAttackComplete}
-            />
-          )}
-          {healInfo && (
-            <HealBanner
-              {...healInfo}
-              onComplete={handleHealComplete}
-            />
-          )}
+          {isDesktop && Banners}
           <CharacterInfoCard />
+          {!isDesktop && Banners}
           <ActionBar
             onAttackStart={handleAttackStart}
             onHealStart={handleHealStart}

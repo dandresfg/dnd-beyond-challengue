@@ -7,6 +7,12 @@
     padding-top: 8px;
 }
 
+@media screen and (max-width: 768px) {
+    .list {
+        justify-content: center;
+    }
+}
+
 .list.horizontal {
     flex-direction: row;
     width: 100%;

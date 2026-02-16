@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo } from "react";
 import { Enemy, DamageType } from "@/types";
 import { ENEMIES } from "./data";
 import { Banner } from "@/components/Banner";
@@ -14,7 +14,7 @@ interface AttackBannerProps {
 }
 
 export const AttackBanner = ({ damageType, amount, onComplete }: AttackBannerProps) => {
-    const [enemy] = useState<Enemy | null>(ENEMIES.find(e => e.damageType === damageType) || null);
+    const enemy = useMemo<Enemy | null>(() => ENEMIES.find(e => e.damageType === damageType) || null, [damageType]);
     const { isMobile } = useBreakpoint();
 
     if (!enemy) return null;
@@ -31,10 +31,10 @@ export const AttackBanner = ({ damageType, amount, onComplete }: AttackBannerPro
                     />
                 </div>
 
-                <Flex direction="row" align="center" grow={1}>
-                    <Flex direction="column" gap={1}>
+                <Flex direction={isMobile ? "column" : "row"} align="center" grow={1}>
+                    <Flex direction="column" align={isMobile ? "center" : "start"} gap={1}>
                         <Text variant="label" className={styles.label}>Incoming Attack</Text>
-                        <Text variant="h2" className={styles.enemyName}>{enemy.name} <span className={styles.castsText}>({damageType})</span></Text>
+                        <Text variant="h2" className={styles.enemyName}>{enemy.name}</Text>
                     </Flex>
                     <Flex align="center" justify="center" grow={1}>
                         <Flex direction="row" align="center" gap={1}>
@@ -44,8 +44,8 @@ export const AttackBanner = ({ damageType, amount, onComplete }: AttackBannerPro
                     </Flex>
                 </Flex>
 
-                <Flex direction="row" gap={4} align="center" className={styles.damageInfo}>
-                    <Flex direction="column" align="end">
+                <Flex direction="row" gap={4} align="center" justify="center" className={styles.damageInfo}>
+                    <Flex direction="column" align={isMobile ? "center" : "end"}>
                         <Text variant="label" className={styles.damageLabel}>Damage</Text>
                         <Flex direction="row" align="baseline" gap={1}>
                             <Text variant="h1" className={styles.damageAmount}>{amount}</Text>

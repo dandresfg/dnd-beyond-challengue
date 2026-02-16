@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { DamageType } from '@/types';
-import { API_BASE_URL } from '@/config/api';
+import { Api } from '@/config/api';
+import { mutatePlayer } from './useCharacter';
 
 interface DamagePayload {
     damageType: DamageType;
@@ -16,20 +17,11 @@ export const useDamage = (characterSlug: string) => {
         setError(null);
 
         try {
-            const response = await fetch(`${API_BASE_URL}/characters/${characterSlug}/damage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
+            const response = await Api.post(`/characters/${characterSlug}/damage`, {
+                damageType: payload.damageType,
+                amount: payload.amount,
             });
-
-            if (!response.ok) {
-                throw new Error('Failed to apply damage');
-            }
-
-            const data = await response.json();
-            return data;
+            mutatePlayer(characterSlug, response);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An error occurred');
             throw err;

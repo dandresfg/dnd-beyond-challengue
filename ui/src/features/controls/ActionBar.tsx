@@ -4,6 +4,7 @@ import { Flex } from "@/components/Flex";
 import { Text } from "@/components/Text";
 import { DamageType } from "@/types";
 import { useDamage } from "@/hooks/useDamage";
+import { useHealing } from "@/hooks/useHealing";
 import { useCharacter } from "@/hooks/useCharacter";
 import styles from "./ActionBar.module.css";
 
@@ -15,7 +16,8 @@ interface ActionBarProps {
 export const ActionBar = ({ onAttackStart, onHealStart }: ActionBarProps) => {
     const { player } = useCharacter();
     const { applyDamage } = useDamage(player?.slug || '');
-    
+    const { heal, addTempHp } = useHealing(player?.slug || '');
+
     const [attackAmount, setAttackAmount] = useState(0);
     const [damageType, setDamageType] = useState<DamageType>(DamageType.FIRE);
     const [healAmount, setHealAmount] = useState(0);
@@ -23,24 +25,35 @@ export const ActionBar = ({ onAttackStart, onHealStart }: ActionBarProps) => {
 
     const handleAttack = async () => {
         if (!player || attackAmount <= 0) return;
-        
-        onAttackStart(damageType, attackAmount);
-        
+
         try {
+            onAttackStart(damageType, attackAmount);
             await applyDamage({ damageType, amount: attackAmount });
         } catch (error) {
             console.error('Failed to apply damage:', error);
         }
     };
 
-    const handleHeal = () => {
+    const handleHeal = async () => {
         if (healAmount <= 0) return;
-        onHealStart('heal', healAmount);
+
+        try {
+            onHealStart('heal', healAmount);
+            await heal({ amount: healAmount });
+        } catch (error) {
+            console.error('Failed to apply healing:', error);
+        }
     };
 
-    const handleAddTempHp = () => {
+    const handleAddTempHp = async () => {
         if (tempHpAmount <= 0) return;
-        onHealStart('tempHp', tempHpAmount);
+
+        try {
+            onHealStart('tempHp', tempHpAmount);
+            await addTempHp({ amount: tempHpAmount });
+        } catch (error) {
+            console.error('Failed to add temporary HP:', error);
+        }
     };
 
     return (

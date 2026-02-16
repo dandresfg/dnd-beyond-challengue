@@ -98,6 +98,11 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
 
+.button:focus {
+    outline: 2px solid #d97706;
+    outline-offset: 2px;
+}
+
 .button:hover {
     transform: translateY(-1px);
     box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.4);
@@ -105,6 +110,15 @@
 
 .button:active {
     transform: translateY(0.5px);
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button:disabled:hover {
+    transform: none;
 }
 
 .buttonDamage {

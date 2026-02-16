@@ -12,6 +12,17 @@
     animation: slideDown 0.3s ease-out;
 }
 
+.banner:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 4px;
+}
+
+@media screen and (max-width: 768px) {
+    .banner {
+        padding-right: 16px;
+    }
+}
+
 @keyframes slideDown {
     from {
         opacity: 0;

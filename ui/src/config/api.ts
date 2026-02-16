@@ -9,3 +9,15 @@ export const fetcher = (url: string) => ofetch(url, {
         'Content-Type': 'application/json',
     },
 })
+
+export const Api = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    post: (url: string, data: Record<string, any>) => ofetch(url, {
+        method: 'POST',
+        body: data,
+        baseURL: API_BASE_URL,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }),
+}

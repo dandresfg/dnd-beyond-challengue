@@ -43,7 +43,7 @@ export const Sidebar = ({ logs }: SidebarProps) => {
                 aria-live="polite"
                 aria-atomic="false"
             >
-                {logs.length === 0 ? (
+                {!logs.length ? (
                     <Text variant="label" className={styles.emptyState}>No actions yet</Text>
                 ) : (
                     <Flex direction="column" gap={2}>
