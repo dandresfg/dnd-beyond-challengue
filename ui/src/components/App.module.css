@@ -1,0 +1,24 @@
+.appContainer {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.mainContent {
+    overflow: hidden;
+}
+
+.contentArea {
+    overflow-y: auto;
+    padding: 24px;
+}
+
+/* Mobile/Tablet: Make main content scrollable */
+@media (max-width: 1024px) {
+    .mainContent {
+        overflow-y: auto;
+    }
+
+    .contentArea {
+        overflow-y: visible;
+    }
+}

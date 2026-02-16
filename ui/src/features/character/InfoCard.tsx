@@ -4,10 +4,12 @@ import { HealthBanner } from "./HealthBanner";
 import { Avatar } from "./Avatar";
 import { Flex, FlexProps } from "@/components/Flex";
 import { Text } from "@/components/Text";
+import { useBreakpoint } from "@hooks/useMediaQuery";
 import styles from "./InfoCard.module.css";
 
 export const CharacterInfoCard = () => {
     const { player } = useCharacter();
+    const { isLargeDesktop } = useBreakpoint();
 
     if (!player) return null;
 
@@ -15,31 +17,42 @@ export const CharacterInfoCard = () => {
         <Flex direction="column" className={styles.card}>
             <div className={styles.innerBorder}></div>
 
-            <Flex direction="row" gap={3} align="center" className={styles.content}>
-                <StatsBanner stats={player.stats} />
+            <Flex direction={isLargeDesktop ? "row" : "column"} grow={1} gap={3} className={styles.content}>
+                <StatsBanner stats={player.stats} isHorizontal={!isLargeDesktop} />
 
-                <Avatar src={`${player.slug}.png`} alt={player.name} />
+                <Flex direction={!isLargeDesktop ? "column" : "row"} grow={1} gap={3} align={!isLargeDesktop ? "center" : "center"}>
+                    <Avatar src={`${player.slug}.png`} alt={player.name} />
 
-                <Flex direction="column" gap={2} grow={1}>
-                    <Text variant="h2">{player.name}</Text>
+                    <Flex direction="column" gap={2} grow={1} style={{ width: '100%' }}>
+                        <Text variant="h2">{player.name}</Text>
 
-                    <Flex direction="row" gap={5}>
-                        <Flex direction="column" gap={1} grow={1}>
-                            <InfoRow label="Max HP:" value={player.hitPoints} />
-                            <InfoRow label="Current HP:" value={player.currentHp} />
-                            <InfoRow label="Level:" value={player.level} />
+                        <Flex direction={!isLargeDesktop ? "column" : "row"} gap={!isLargeDesktop ? 1 : 5}>
+                            <Flex direction="column" gap={1} grow={1}>
+                                <InfoRow label="Max HP:" value={player.hitPoints} />
+                                <InfoRow label="Current HP:" value={player.currentHp} />
+                                <InfoRow label="Level:" value={player.level} />
+                            </Flex>
+                            {isLargeDesktop && (
+                                <Flex direction="column" gap={1} grow={1}>
+                                    <InfoRow label="Classes:" value={player.classes.map(cls => cls.name).join(', ')} />
+                                    <InfoRow label="Defenses:" value={player.defenses.map(d => d.type).join(', ')} />
+                                </Flex>
+                            )}
                         </Flex>
-                        <Flex direction="column" gap={1} grow={1}>
-                            <InfoRow label="Classes:" value={player.classes.map(cls => cls.name).join(', ')} />
-                            <InfoRow label="Defenses:" value={player.defenses.map(d => d.type).join(', ')} />
-                        </Flex>
-                    </Flex>
 
-                    <Flex direction="column" gap={1}>
-                        <Text variant="label" className={styles.itemsLabel}>ITEMS</Text>
-                        <Text variant="body" className={styles.itemsList}>
-                            {player.items.map(item => item.name).join(', ')}
-                        </Text>
+                        {!isLargeDesktop && (
+                            <Flex direction="column" gap={1}>
+                                <InfoRow label="Classes:" value={player.classes.map(cls => cls.name).join(', ')} />
+                                <InfoRow label="Defenses:" value={player.defenses.map(d => d.type).join(', ')} />
+                            </Flex>
+                        )}
+
+                        <Flex direction="column" gap={1}>
+                            <Text variant="label" className={styles.itemsLabel}>ITEMS</Text>
+                            <Text variant="body" className={styles.itemsList}>
+                                {player.items.map(item => item.name).join(', ')}
+                            </Text>
+                        </Flex>
                     </Flex>
                 </Flex>
             </Flex>

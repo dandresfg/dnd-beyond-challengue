@@ -3,10 +3,8 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 4px;
-    margin: 10px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     position: relative;
-    overflow: hidden;
 }
 
 .innerBorder {
@@ -19,14 +17,13 @@
 }
 
 .content {
+    flex-grow: 1;
     padding: 20px;
-    position: relative;
-    z-index: 0;
 }
 
 .infoRow {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    padding-bottom: 25px;
+    padding-bottom: 4px;
 }
 
 .itemsLabel {

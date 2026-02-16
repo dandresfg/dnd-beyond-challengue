@@ -10,7 +10,7 @@ interface HealthBannerProps {
 
 export const HealthBanner = ({ currentHp, maxHp, tempHp }: HealthBannerProps) => {
     const healthPercentage = (currentHp / maxHp) * 100;
-
+    const tempHpPercentage = (tempHp / maxHp) * 100;
     return (
         <Flex direction="column" gap={1} className={styles.healthSection}>
             <Flex direction="row" justify="between" align="end">
@@ -29,7 +29,18 @@ export const HealthBanner = ({ currentHp, maxHp, tempHp }: HealthBannerProps) =>
                 <div
                     className={styles.healthBarFill}
                     style={{ width: `${healthPercentage}%` }}
+                    aria-label={`Current HP: ${currentHp} out of ${maxHp}`}
                 ></div>
+                {tempHp > 0 && (
+                    <div
+                        className={styles.tempHpBarFill}
+                        style={{
+                            left: `${healthPercentage}%`,
+                            width: `${tempHpPercentage}%`
+                        }}
+                        aria-label={`Temporary HP: ${tempHp}`}
+                    ></div>
+                )}
             </div>
         </Flex>
     );

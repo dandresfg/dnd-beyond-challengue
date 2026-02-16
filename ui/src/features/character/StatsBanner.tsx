@@ -11,9 +11,17 @@ const statsList: { label: string, icon: React.ReactNode, key: keyof IStats }[] =
     { label: "Charisma", icon: <IconHeartHandshake aria-hidden="true" />, key: "charisma" },
 ]
 
-export const StatsBanner = ({ stats }: { stats: IStats }) => {
+interface StatsBannerProps {
+    stats: IStats;
+    isHorizontal?: boolean;
+}
+
+export const StatsBanner = ({ stats, isHorizontal = false }: StatsBannerProps) => {
     return (
-        <ul className={styles.list} aria-label="Character statistics">
+        <ul 
+            className={`${styles.list} ${isHorizontal ? styles.horizontal : ''}`} 
+            aria-label="Character statistics"
+        >
             {statsList.map((stat) => (
                 <BannterItem key={stat.key} icon={stat.icon} label={stat.label} value={stats[stat.key]} />
             ))}
