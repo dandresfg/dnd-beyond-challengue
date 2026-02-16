@@ -1,6 +1,10 @@
 import { useCharacter } from "@hooks/useCharacter"
 import { StatsBanner } from "./StatsBanner";
-import { Flex } from "@/components/Flex";
+import { HealthBanner } from "./HealthBanner";
+import { Avatar } from "./Avatar";
+import { Flex, FlexProps } from "@/components/Flex";
+import { Text } from "@/components/Text";
+import styles from "./InfoCard.module.css";
 
 export const CharacterInfoCard = () => {
     const { player } = useCharacter();
@@ -8,48 +12,55 @@ export const CharacterInfoCard = () => {
     if (!player) return null;
 
     return (
-        <div style={{ padding: '1rem', borderRadius: 16, margin: "2rem" }}>
-            <Flex direction="row" gap={3} align="center">
+        <Flex direction="column" className={styles.card}>
+            <div className={styles.innerBorder}></div>
+
+            <Flex direction="row" gap={3} align="center" className={styles.content}>
                 <StatsBanner stats={player.stats} />
-                <Flex gap={2}>
-                    <img src={`${player.slug}.png`} alt={player.name} width={300} height={300} style={{ borderRadius: '50%' }} />
-                </Flex>
-                <Flex gap={2}>
-                    <Flex>
-                        <h2>{player.name}</h2>
-                        <p>Max HP: {player.hitPoints}</p>
-                        <p>Current HP: {player.currentHp}</p>
-                        <p>Level: {player.level}</p>
-                        <p>Temporary HP: {player.tempHp}</p>
-                    </Flex>
-                    <Flex grow={1}>
-                        <h5>Items</h5>
-                        <ul>
-                            {player.items.map((item) => (
-                                <li key={item.name}>{item.name}</li>
-                            ))}
-                        </ul>
-                    </Flex>
-                    <Flex direction="row">
-                        <Flex grow={1}>
-                            <h5>Classes</h5>
-                            <ul>
-                                {player.classes.map((cls) => (
-                                    <li key={cls.name}>{cls.name}</li>
-                                ))}
-                            </ul>
+
+                <Avatar src={`${player.slug}.png`} alt={player.name} />
+
+                <Flex direction="column" gap={2} grow={1}>
+                    <Text variant="h2">{player.name}</Text>
+
+                    <Flex direction="row" gap={5}>
+                        <Flex direction="column" gap={1} grow={1}>
+                            <InfoRow label="Max HP:" value={player.hitPoints} />
+                            <InfoRow label="Current HP:" value={player.currentHp} />
+                            <InfoRow label="Level:" value={player.level} />
                         </Flex>
-                        <Flex grow={1}>
-                            <h5>Defenses</h5>
-                            <ul>
-                                {player.defenses.map((defense) => (
-                                    <li key={defense.type}>{defense.type}</li>
-                                ))}
-                            </ul>
+                        <Flex direction="column" gap={1} grow={1}>
+                            <InfoRow label="Classes:" value={player.classes.map(cls => cls.name).join(', ')} />
+                            <InfoRow label="Defenses:" value={player.defenses.map(d => d.type).join(', ')} />
                         </Flex>
+                    </Flex>
+
+                    <Flex direction="column" gap={1}>
+                        <Text variant="label" className={styles.itemsLabel}>ITEMS</Text>
+                        <Text variant="body" className={styles.itemsList}>
+                            {player.items.map(item => item.name).join(', ')}
+                        </Text>
                     </Flex>
                 </Flex>
             </Flex>
-        </div>
+
+            <HealthBanner
+                currentHp={player.currentHp}
+                maxHp={player.hitPoints}
+                tempHp={player.tempHp}
+            />
+        </Flex>
     )
 }
+
+interface InfoRowProps extends Omit<FlexProps, "children"> {
+    label: string;
+    value: string | number;
+}
+
+const InfoRow = ({ label, value, direction = 'row', justify = 'between', ...props }: InfoRowProps) => (
+    <Flex direction={direction} justify={justify} align="end" className={styles.infoRow} {...props}>
+        <Text variant="label">{label}</Text>
+        <Text variant="value">{value}</Text>
+    </Flex>
+)

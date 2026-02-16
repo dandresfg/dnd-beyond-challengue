@@ -1,5 +1,4 @@
 import { IStats } from "@/types"
-import { Flex } from "@/components/Flex"
 import styles from "./StatsBanner.module.css"
 import { IconBarbell, IconBolt, IconBrain, IconEye, IconHeart, IconHeartHandshake } from "@tabler/icons-react"
 
@@ -14,21 +13,22 @@ const statsList: { label: string, icon: React.ReactNode, key: keyof IStats }[] =
 
 export const StatsBanner = ({ stats }: { stats: IStats }) => {
     return (
-        <Flex direction="row">
-            <ul className={styles.list} aria-label="Character statistics">
-                {statsList.map((stat) => (
-                    <BannterItem key={stat.key} icon={stat.icon} label={stat.label} value={stats[stat.key]} />
-                ))}
-            </ul>
-        </Flex>
+        <ul className={styles.list} aria-label="Character statistics">
+            {statsList.map((stat) => (
+                <BannterItem key={stat.key} icon={stat.icon} label={stat.label} value={stats[stat.key]} />
+            ))}
+        </ul>
     )
 }
 
 const BannterItem = ({ icon, label, value }: { icon: React.ReactNode, label: string, value: number }) => {
     return (
-        <li className="flex-row align-center gap-2">
-            {icon}
-            <p><span className="srOnly">{label}: </span>{value}</p>
+        <li className={styles.item}>
+            <span className={styles.icon} aria-hidden="true">{icon}</span>
+            <span className={styles.value}>
+                <span className="sr-only">{label}</span>
+                {value}
+            </span>
         </li>
     )
 }

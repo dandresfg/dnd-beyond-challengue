@@ -1,0 +1,41 @@
+.card {
+    background: #18181b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 4px;
+    margin: 10px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.innerBorder {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.content {
+    padding: 20px;
+    position: relative;
+    z-index: 0;
+}
+
+.infoRow {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 25px;
+}
+
+.itemsLabel {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #71717a;
+    letter-spacing: 0.1em;
+}
+
+.itemsList {
+    font-style: italic;
+}

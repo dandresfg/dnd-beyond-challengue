@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode } from 'react';
 
-interface FlexProps {
+export interface FlexProps {
   children: ReactNode;
   direction?: 'row' | 'column';
   justify?: 'center' | 'between' | 'start' | 'end' | 'around' | 'evenly';
