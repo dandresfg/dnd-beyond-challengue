@@ -7,38 +7,46 @@ import { DamageType, DefenseType, ICharacter } from '@/types';
  * - Normal: Full damage
  */
 export const calculateEffectiveDamage = (
-    character: ICharacter,
-    damageType: DamageType,
-    rawDamage: number
+  character: ICharacter,
+  damageType: DamageType,
+  rawDamage: number,
 ): number => {
-    const defenses = character.defenses || [];
+  const defenses = character.defenses || [];
 
-    const hasImmunity = defenses.some(
-        (d) => d.type === damageType && d.defense === DefenseType.IMMUNITY
-    );
-    if (hasImmunity) return 0;
+  const hasImmunity = defenses.some(
+    (d) => d.type === damageType && d.defense === DefenseType.IMMUNITY,
+  );
+  if (hasImmunity) return 0;
 
-    const hasResistance = defenses.some(
-        (d) => d.type === damageType && d.defense === DefenseType.RESISTANCE
-    );
-    if (hasResistance) return Math.floor(rawDamage / 2);
+  const hasResistance = defenses.some(
+    (d) => d.type === damageType && d.defense === DefenseType.RESISTANCE,
+  );
+  if (hasResistance) return Math.floor(rawDamage / 2);
 
-    return rawDamage;
+  return rawDamage;
 };
 
 export const getDefenseStatus = (
-    character: ICharacter,
-    damageType: DamageType
+  character: ICharacter,
+  damageType: DamageType,
 ): 'immune' | 'resistant' | 'normal' => {
-    const defenses = character.defenses || [];
+  const defenses = character.defenses || [];
 
-    if (defenses.some((d) => d.type === damageType && d.defense === DefenseType.IMMUNITY)) {
-        return 'immune';
-    }
+  if (
+    defenses.some(
+      (d) => d.type === damageType && d.defense === DefenseType.IMMUNITY,
+    )
+  ) {
+    return 'immune';
+  }
 
-    if (defenses.some((d) => d.type === damageType && d.defense === DefenseType.RESISTANCE)) {
-        return 'resistant';
-    }
+  if (
+    defenses.some(
+      (d) => d.type === damageType && d.defense === DefenseType.RESISTANCE,
+    )
+  ) {
+    return 'resistant';
+  }
 
-    return 'normal';
+  return 'normal';
 };

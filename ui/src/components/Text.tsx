@@ -15,7 +15,7 @@ export const Text = ({
   style = {},
 }: TextProps) => {
   const variantClass = styles[variant] || '';
-  
+
   return (
     <span className={`${variantClass} ${className}`} style={style}>
       {children}

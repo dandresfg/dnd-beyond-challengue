@@ -6,13 +6,11 @@
         "dev": "concurrently \"bun run dev:api\" \"bun run dev:ui\"",
         "dev:api": "cd api && bun run start:dev",
         "dev:ui": "cd ui && bun run dev",
-        "install": "cd api && bun install && cd ../ui && bun install"
+        "format:ui": "cd ui && bun run format",
+        "format:api": "cd api && bun run format",
+        "install:all": "cd api && bun install && cd ../ui && bun install"
     },
     "devDependencies": {
         "concurrently": "^9.2.1"
-    },
-    "dependencies": {
-        "api": "file:api",
-        "ui": "file:ui"
     }
 }

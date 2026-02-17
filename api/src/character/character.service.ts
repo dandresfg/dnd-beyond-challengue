@@ -140,8 +140,8 @@ export class CharacterService {
       tempHp: character.tempHp,
       classes: character.classes,
       stats: character.stats,
-      items: character.items,
-      defenses: character.defenses,
+      items: character.items ?? [],
+      defenses: character.defenses ?? [],
       isAlive: character.currentHp > 0,
     };
   }

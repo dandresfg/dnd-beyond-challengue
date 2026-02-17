@@ -59,10 +59,10 @@ export class Character {
   @Column('json')
   stats: IStats;
 
-  @Column('json', { default: '[]' })
+  @Column('json', { nullable: true })
   items: IItem[];
 
-  @Column('json', { default: '[]' })
+  @Column('json', { nullable: true })
   defenses: IDefense[];
 
   getStat(stat: keyof IStats): number {
