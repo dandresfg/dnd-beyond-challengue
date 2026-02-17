@@ -5,6 +5,7 @@ import { Banner } from '@/components/Banner';
 import { Image } from '@/components/Image';
 import { Flex } from '@/components/Flex';
 import { Text } from '@/components/Text';
+import { Title } from '@/components/Title';
 import { useCharacter } from '@/hooks/useCharacter';
 import {
   calculateEffectiveDamage,
@@ -67,9 +68,9 @@ export const AttackBanner = ({
             <Text variant="label" className={styles.label}>
               Incoming Attack
             </Text>
-            <Text variant="h2" className={styles.enemyName}>
+            <Title variant="h2" className={styles.enemyName}>
               {enemy.name}
-            </Text>
+            </Title>
           </Flex>
           <Flex align="center" justify="center" grow={1}>
             <Flex direction="row" align="center" gap={1}>
@@ -99,14 +100,14 @@ export const AttackBanner = ({
                   <Text variant="body" className={styles.originalDamage}>
                     <span className={styles.strikethrough}>({amount})</span>
                   </Text>
-                  <Text variant="h1" className={styles.damageAmount}>
+                  <Title variant="h2" className={styles.damageAmount}>
                     {effectiveDamage}
-                  </Text>
+                  </Title>
                 </>
               ) : (
-                <Text variant="h1" className={styles.damageAmount}>
+                <Title variant="h2" className={styles.damageAmount}>
                   {amount}
-                </Text>
+                </Title>
               )}
             </Flex>
           </Flex>

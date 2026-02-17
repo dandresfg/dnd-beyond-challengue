@@ -1,24 +1,23 @@
 import { createElement, ReactNode } from 'react';
 import styles from './Text.module.css';
 
-interface TextProps {
+type TitleVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+
+interface TitleProps {
   children: ReactNode;
-  variant?: 'label' | 'value' | 'body' | 'mono';
-  as?: 'p' | 'span';
+  variant: TitleVariant;
   className?: string;
 }
 
-export const Text = ({
+export const Title = ({
   children,
-  variant = 'body',
-  as = 'span',
+  variant,
   className = '',
   ...rest
-}: TextProps &
-  React.HTMLAttributes<HTMLParagraphElement | HTMLSpanElement>) => {
+}: TitleProps & React.HTMLAttributes<HTMLHeadingElement>) => {
   const variantClass = styles[variant] || '';
   return createElement(
-    as,
+    variant,
     {
       className: `${variantClass} ${className}`.trim(),
       ...rest,

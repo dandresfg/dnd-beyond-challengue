@@ -25,8 +25,6 @@ export interface Enemy {
   avatarUrl: string;
   damageType: DamageType;
   attackName: string;
-  minDamage: number;
-  maxDamage: number;
 }
 export interface IClass {
   name: string;

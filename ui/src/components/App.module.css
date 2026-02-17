@@ -9,7 +9,7 @@
 
 .contentArea {
     overflow-y: auto;
-    padding: 24px;
+    padding: 18px;
 }
 
 /* Mobile/Tablet: Make main content scrollable */
@@ -20,6 +20,6 @@
 
     .contentArea {
         overflow-y: visible;
-        padding: 16px 0px;
+        padding: 9px 0px;
     }
 }

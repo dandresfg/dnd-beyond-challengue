@@ -1,0 +1,16 @@
+import { createElement, ReactNode } from 'react';
+
+type GroupComponent = keyof React.JSX.IntrinsicElements;
+
+interface GroupProps {
+  children: ReactNode;
+  as?: GroupComponent;
+}
+
+export const Group = ({
+  children,
+  as = 'div',
+  ...rest
+}: GroupProps & React.HTMLAttributes<HTMLElement>) => {
+  return createElement(as, { role: 'group', ...rest }, children);
+};

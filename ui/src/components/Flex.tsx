@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode } from 'react';
 
-export interface FlexProps {
+export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   direction?: 'row' | 'column';
   justify?: 'center' | 'between' | 'start' | 'end' | 'around' | 'evenly';
@@ -9,7 +9,6 @@ export interface FlexProps {
   grow?: 1 | 2 | 3;
   gap?: number;
   className?: string;
-  style?: CSSProperties;
 }
 
 export const Flex = ({
@@ -22,6 +21,7 @@ export const Flex = ({
   gap,
   className = '',
   style = {},
+  ...rest
 }: FlexProps) => {
   const flexStyle: CSSProperties = {
     display: 'flex',
@@ -61,11 +61,11 @@ export const Flex = ({
   }
 
   if (gap !== undefined) {
-    flexStyle.gap = `${gap * 6}px`;
+    flexStyle.gap = `${gap * 5}px`;
   }
 
   return (
-    <div className={className} style={flexStyle}>
+    <div className={className} style={flexStyle} {...rest}>
       {children}
     </div>
   );

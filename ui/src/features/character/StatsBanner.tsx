@@ -1,5 +1,5 @@
+import { Group } from '@/components/Group';
 import { IStats } from '@/types';
-import styles from './StatsBanner.module.css';
 import {
   IconBarbell,
   IconBolt,
@@ -8,6 +8,7 @@ import {
   IconHeart,
   IconHeartHandshake,
 } from '@tabler/icons-react';
+import styles from './StatsBanner.module.css';
 
 const statsList: { label: string; icon: React.ReactNode; key: keyof IStats }[] =
   [
@@ -49,19 +50,24 @@ export const StatsBanner = ({
   isHorizontal = false,
 }: StatsBannerProps) => {
   return (
-    <ul
-      className={`${styles.list} ${isHorizontal ? styles.horizontal : ''}`}
-      aria-label="Character statistics"
+    <Group
+      aria-label="Character statistics: Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma"
+      tabIndex={0}
     >
-      {statsList.map((stat) => (
-        <BannterItem
-          key={stat.key}
-          icon={stat.icon}
-          label={stat.label}
-          value={stats[stat.key]}
-        />
-      ))}
-    </ul>
+      <ul
+        className={`${styles.list} ${isHorizontal ? styles.horizontal : ''}`}
+        aria-label="Character statistics"
+      >
+        {statsList.map((stat) => (
+          <BannterItem
+            key={stat.key}
+            icon={stat.icon}
+            label={stat.label}
+            value={stats[stat.key]}
+          />
+        ))}
+      </ul>
+    </Group>
   );
 };
 
@@ -75,7 +81,7 @@ const BannterItem = ({
   value: number;
 }) => {
   return (
-    <li className={styles.item}>
+    <li className={styles.item} title={`${label}: ${value}`}>
       <span className={styles.icon} aria-hidden="true">
         {icon}
       </span>

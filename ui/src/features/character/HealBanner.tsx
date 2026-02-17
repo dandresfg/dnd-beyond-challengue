@@ -1,6 +1,7 @@
 import { Banner } from '@/components/Banner';
 import { Flex } from '@/components/Flex';
 import { Text } from '@/components/Text';
+import { Title } from '@/components/Title';
 import styles from './HealBanner.module.css';
 
 interface HealBannerProps {
@@ -39,12 +40,12 @@ export const HealBanner = ({ type, amount, onComplete }: HealBannerProps) => {
           <Text variant="label" className={styles.amountLabel}>
             Amount
           </Text>
-          <Text
-            variant="h1"
+          <Title
+            variant="h2"
             className={`${styles.amount} ${isHeal ? styles.healAmount : styles.tempAmount}`}
           >
             +{amount}
-          </Text>
+          </Title>
         </Flex>
       </Flex>
     </Banner>

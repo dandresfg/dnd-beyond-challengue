@@ -14,8 +14,29 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 0.025em;
+}
+
+.h4 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 0.025em;
+}
+
+.h5 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 0.025em;
+}
+
 .label {
-  font-size: 1rem;
+  font-size: 1.15rem;
   color: #a1a1aa;
 }
 

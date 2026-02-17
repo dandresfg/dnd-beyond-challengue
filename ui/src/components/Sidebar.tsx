@@ -1,7 +1,7 @@
-import { Flex } from './Flex';
-import { Text } from './Text';
 import { LogEntry } from '@hooks/useActionLog';
+import { Flex } from './Flex';
 import styles from './Sidebar.module.css';
+import { Text } from './Text';
 
 interface SidebarProps {
   logs: LogEntry[];
@@ -44,7 +44,6 @@ export const Sidebar = ({ logs }: SidebarProps) => {
             Battle Log
           </Text>
         </Flex>
-        <span className={styles.badge}>{logs.length} entries</span>
       </Flex>
       <div
         className={styles.content}
@@ -53,9 +52,11 @@ export const Sidebar = ({ logs }: SidebarProps) => {
         aria-atomic="false"
       >
         {!logs.length ? (
-          <Text variant="label" className={styles.emptyState}>
-            No actions yet
-          </Text>
+          <Flex justify="center">
+            <Text variant="label" className={styles.emptyState}>
+              No actions yet
+            </Text>
+          </Flex>
         ) : (
           <Flex direction="column" gap={2}>
             {logs.map((log) => (
