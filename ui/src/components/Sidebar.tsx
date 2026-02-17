@@ -59,13 +59,17 @@ export const Sidebar = ({ logs }: SidebarProps) => {
           </Flex>
         ) : (
           <Flex direction="column" gap={2}>
-            {logs.map((log) => (
+            {logs.map((log) => {
+              const description = log.enemy
+                ? `${formatTime(log.timestamp)}. ${log.enemy.name}. ${log.message}`
+                : `${formatTime(log.timestamp)}. ${log.message}`;
+              return (
               <div
                 key={log.id}
                 className={`${styles.logEntry} ${getLogColor(log.type)}`}
                 tabIndex={0}
                 role="article"
-                aria-label={`${log.type} log entry: ${log.message}`}
+                aria-label={`${log.type} log entry. ${description}`}
               >
                 <Flex
                   direction="row"
@@ -97,7 +101,8 @@ export const Sidebar = ({ logs }: SidebarProps) => {
                   </Text>
                 )}
               </div>
-            ))}
+            );
+            })}
           </Flex>
         )}
       </div>

@@ -24,7 +24,7 @@ export const Banner = ({
   timeout = 8000,
 }: BannerProps) => {
   const [showBanner, setShowBanner] = useState(true);
-  const bannerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const onCompleteRef = useRef(onComplete);
   const [shouldAutoClose] = useState(!isScreenReaderActive());
 
@@ -34,8 +34,8 @@ export const Banner = ({
 
   useEffect(() => {
     const focusTimer = setTimeout(() => {
-      if (bannerRef.current) {
-        bannerRef.current.focus();
+      if (contentRef.current) {
+        contentRef.current.focus();
       }
     }, 0);
 
@@ -69,11 +69,9 @@ export const Banner = ({
   return (
     <div className={styles.bannerWrapper}>
       <div
-        ref={bannerRef}
         className={`${styles.banner} ${styles[variant]}`}
         role="alert"
         aria-live={variant === 'danger' ? 'assertive' : 'polite'}
-        tabIndex={-1}
         onKeyDown={handleKeyDown}
       >
         <button
@@ -83,7 +81,9 @@ export const Banner = ({
         >
           <IconX />
         </button>
-        {children}
+        <div ref={contentRef} tabIndex={-1} className={styles.bannerContent}>
+          {children}
+        </div>
       </div>
     </div>
   );

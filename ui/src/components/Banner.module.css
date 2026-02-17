@@ -12,7 +12,7 @@
     animation: slideDown 0.3s ease-out;
 }
 
-.banner:focus {
+.bannerContent:focus {
     outline: 2px solid rgba(255, 255, 255, 0.5);
     outline-offset: 4px;
 }
