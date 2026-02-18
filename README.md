@@ -1,9 +1,9 @@
 # D&D Beyond Challenge
+<img width="1415" height="344" alt="image" src="https://github.com/user-attachments/assets/30b4e634-61b2-4b3e-9142-f3b9a4735704" />
 
-D&D 5e HP Management — API (NestJS) and UI (React + Vite).
+
 
 ## Prerequisites
-
 - [Bun](https://bun.sh/) — install it and you're set; it handles dependencies and running the app.
 - For running both servers at once, install concurrently globally (one-time):
 
