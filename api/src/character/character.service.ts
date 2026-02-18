@@ -52,6 +52,11 @@ export class CharacterService {
       throw new NotFoundException(`Character "${slug}" not found`);
     }
 
+    // If the character is dead, return the current state without applying damage
+    if (character.currentHp === 0) {
+      return this.toDto(character);
+    }
+
     const effectiveDamage = DamageCalculator.calculateEffectiveDamage(
       character,
       damageType,
@@ -114,6 +119,10 @@ export class CharacterService {
 
     if (!character) {
       throw new NotFoundException(`Character "${slug}" not found`);
+    }
+
+    if (character.currentHp === 0) {
+      throw new BadRequestException('Cannot add temporary HP to a dead character');
     }
 
     const previousTempHp = TempHpCalculator.addTempHp(character, amount);
