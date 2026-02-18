@@ -28,10 +28,7 @@ export class CombatLogEntry {
   @JoinColumn({ name: 'characterId' })
   character: Character;
 
-  @Column({
-    type: 'varchar',
-    enum: CombatLogKind,
-  })
+  @Column({ type: 'varchar', length: 20 })
   kind: CombatLogKind;
 
   @Column('json')

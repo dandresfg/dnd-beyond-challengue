@@ -1,6 +1,6 @@
-import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -15,7 +15,9 @@ async function bootstrap() {
     }),
   );
 
-  // Swagger configuration
+  app.setGlobalPrefix('api');
+
+  // Swagger configuration (after setGlobalPrefix so docs show /api/ paths)
   const config = new DocumentBuilder()
     .setTitle('D&D HP Management API')
     .setDescription(
@@ -26,7 +28,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api/docs', app, document);
 
   app.enableCors({
     origin: '*',
@@ -34,10 +36,8 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
-  app.setGlobalPrefix('api');
-
   await app.listen(3000);
   console.log(`Application is running on: http://localhost:3000`);
-  console.log(`Swagger documentation: http://localhost:3000/api`);
+  console.log(`Swagger documentation: http://localhost:3000/api/docs`);
 }
 bootstrap();

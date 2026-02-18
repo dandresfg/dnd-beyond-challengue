@@ -9,8 +9,5 @@
         "format:ui": "cd ui && bun run format",
         "format:api": "cd api && bun run format",
         "install:all": "cd api && bun install && cd ../ui && bun install"
-    },
-    "devDependencies": {
-        "concurrently": "^9.2.1"
     }
 }
