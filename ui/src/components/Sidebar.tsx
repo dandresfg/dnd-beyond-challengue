@@ -64,44 +64,44 @@ export const Sidebar = ({ logs }: SidebarProps) => {
                 ? `${formatTime(log.timestamp)}. ${log.enemy.name}. ${log.message}`
                 : `${formatTime(log.timestamp)}. ${log.message}`;
               return (
-              <div
-                key={log.id}
-                className={`${styles.logEntry} ${getLogColor(log.type)}`}
-                tabIndex={0}
-                role="article"
-                aria-label={`${log.type} log entry. ${description}`}
-              >
-                <Flex
-                  direction="row"
-                  align="center"
-                  gap={1}
-                  className={styles.logHeader}
+                <div
+                  key={log.id}
+                  className={`${styles.logEntry} ${getLogColor(log.type)}`}
+                  tabIndex={0}
+                  role="article"
+                  aria-label={`${log.type} log entry. ${description}`}
                 >
-                  <Text variant="label" className={styles.logTime}>
-                    {formatTime(log.timestamp)}
-                  </Text>
-                </Flex>
-                {log.enemy ? (
                   <Flex
                     direction="row"
                     align="center"
                     gap={1}
-                    className={styles.enemyInfo}
+                    className={styles.logHeader}
                   >
-                    <Text variant="label" className={styles.enemyName}>
-                      {log.enemy.name}
+                    <Text variant="label" className={styles.logTime}>
+                      {formatTime(log.timestamp)}
                     </Text>
+                  </Flex>
+                  {log.enemy ? (
+                    <Flex
+                      direction="row"
+                      align="center"
+                      gap={1}
+                      className={styles.enemyInfo}
+                    >
+                      <Text variant="label" className={styles.enemyName}>
+                        {log.enemy.name}
+                      </Text>
+                      <Text variant="body" className={styles.logMessage}>
+                        {log.message}
+                      </Text>
+                    </Flex>
+                  ) : (
                     <Text variant="body" className={styles.logMessage}>
                       {log.message}
                     </Text>
-                  </Flex>
-                ) : (
-                  <Text variant="body" className={styles.logMessage}>
-                    {log.message}
-                  </Text>
-                )}
-              </div>
-            );
+                  )}
+                </div>
+              );
             })}
           </Flex>
         )}

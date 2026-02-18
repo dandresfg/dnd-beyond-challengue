@@ -29,7 +29,7 @@ export const calculateEffectiveDamage = (
 export const getDefenseStatus = (
   character: ICharacter,
   damageType: DamageType,
-): 'immune' | 'resistant' | 'normal' => {
+): DefenseType | null => {
   const defenses = character.defenses || [];
 
   if (
@@ -37,7 +37,7 @@ export const getDefenseStatus = (
       (d) => d.type === damageType && d.defense === DefenseType.IMMUNITY,
     )
   ) {
-    return 'immune';
+    return DefenseType.IMMUNITY;
   }
 
   if (
@@ -45,8 +45,8 @@ export const getDefenseStatus = (
       (d) => d.type === damageType && d.defense === DefenseType.RESISTANCE,
     )
   ) {
-    return 'resistant';
+    return DefenseType.RESISTANCE;
   }
 
-  return 'normal';
+  return null;
 };

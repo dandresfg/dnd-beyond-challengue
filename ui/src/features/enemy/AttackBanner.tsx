@@ -1,18 +1,18 @@
-import { useMemo } from 'react';
-import { Enemy, DamageType } from '@/types';
-import { ENEMIES } from './data';
 import { Banner } from '@/components/Banner';
-import { Image } from '@/components/Image';
 import { Flex } from '@/components/Flex';
+import { Image } from '@/components/Image';
 import { Text } from '@/components/Text';
 import { Title } from '@/components/Title';
 import { useCharacter } from '@/hooks/useCharacter';
+import { useBreakpoint } from '@/hooks/useMediaQuery';
+import { DamageType, DefenseType, Enemy } from '@/types';
 import {
   calculateEffectiveDamage,
   getDefenseStatus,
 } from '@/utils/damageCalculator';
+import { useMemo } from 'react';
 import styles from './AttackBanner.module.css';
-import { useBreakpoint } from '@/hooks/useMediaQuery';
+import { ENEMIES } from './data';
 
 interface AttackBannerProps {
   damageType: DamageType;
@@ -38,7 +38,7 @@ export const AttackBanner = ({
   }, [player, damageType, amount]);
 
   const defenseStatus = useMemo(() => {
-    if (!player) return 'normal';
+    if (!player) return null;
     return getDefenseStatus(player, damageType);
   }, [player, damageType]);
 
@@ -91,25 +91,32 @@ export const AttackBanner = ({
             <Text variant="label" className={styles.damageLabel}>
               Damage
             </Text>
-            <Text variant="label" className={styles.defenseLabel}>
-              {defenseStatus === 'immune' ? 'IMMUNE' : 'RESIST'}
-            </Text>
-            <Flex direction="row" align="baseline" gap={1}>
-              {defenseStatus !== 'normal' && amount !== effectiveDamage ? (
-                <>
-                  <Text variant="body" className={styles.originalDamage}>
-                    <span className={styles.strikethrough}>({amount})</span>
-                  </Text>
-                  <Title variant="h2" className={styles.damageAmount}>
-                    {effectiveDamage}
-                  </Title>
-                </>
-              ) : (
-                <Title variant="h2" className={styles.damageAmount}>
-                  {amount}
-                </Title>
-              )}
-            </Flex>
+            {defenseStatus ? (
+              <>
+                <Text variant="label" className={styles.defenseLabel}>
+                  {defenseStatus === DefenseType.IMMUNITY ? 'IMMUNE' : 'RESIST'}
+                </Text>
+                <Flex direction="row" align="baseline" gap={1}>
+                  {defenseStatus !== DefenseType.IMMUNITY &&
+                    amount !== effectiveDamage && (
+                      <>
+                        <Text variant="body" className={styles.originalDamage}>
+                          <span className={styles.strikethrough}>
+                            ({amount})
+                          </span>
+                        </Text>
+                        <Title variant="h2" className={styles.damageAmount}>
+                          {effectiveDamage}
+                        </Title>
+                      </>
+                    )}
+                </Flex>
+              </>
+            ) : (
+              <Title variant="h2" className={styles.damageAmount}>
+                {amount}
+              </Title>
+            )}
           </Flex>
         </Flex>
       </Flex>

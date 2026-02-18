@@ -19,7 +19,7 @@ export const HealthBanner = ({
   const tempHpPercentage = (tempHp / maxHp) * 100;
   const ariaLabel = `Health: ${currentHp} current of ${maxHp} max hit points${tempHp > 0 ? `, ${tempHp} temporary` : ''}`;
   return (
-    <Group aria-label={ariaLabel} tabIndex={0}>
+    <Group aria-label={ariaLabel}>
       <Flex direction="column" gap={1} className={styles.healthSection}>
         <Flex direction="row" justify="between" align="end">
           <Text variant="label" className={styles.healthLabel}>

@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { DamageType, Enemy } from '@/types';
+import { useState } from 'react';
 
 export interface LogEntry {
   id: string;

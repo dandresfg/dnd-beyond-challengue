@@ -20,6 +20,12 @@ export class CharacterHealedEvent {
   ) {}
 }
 
+export class CharacterRevivedEvent {
+  public readonly timestamp: Date = new Date();
+
+  constructor(public readonly character: Character) {}
+}
+
 export class CharacterDiedEvent {
   public readonly timestamp: Date = new Date();
 

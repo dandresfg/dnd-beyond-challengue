@@ -76,7 +76,7 @@ export const CharacterInfoCard = () => {
                 </Flex>
               )}
 
-              <Group aria-label={`Items: ${itemsLabel}`} tabIndex={0}>
+              <Group aria-label={`Items: ${itemsLabel}`}>
                 <Flex direction="column" gap={1}>
                   <Text variant="label" className={styles.itemsLabel}>
                     ITEMS

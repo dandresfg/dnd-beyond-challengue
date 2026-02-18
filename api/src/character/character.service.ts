@@ -1,22 +1,23 @@
 import {
+  BadRequestException,
   Injectable,
   NotFoundException,
-  BadRequestException,
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { CharacterRepository } from './character.repository';
-import { CharacterResponseDto } from './character.dto';
-import { Character } from './character.entity';
-import { DamageType } from '../lib/types/damage.types';
-import { DamageCalculator } from '../lib/damage.calculator';
-import { TempHpCalculator } from '../lib/temp-hp.calculator';
 import { CharacterEventNames } from '../events/character-event.dto';
 import {
   CharacterDamagedEvent,
-  CharacterHealedEvent,
   CharacterDiedEvent,
+  CharacterHealedEvent,
+  CharacterRevivedEvent,
   TempHpAddedEvent,
 } from '../events/character.events';
+import { DamageCalculator } from '../lib/damage.calculator';
+import { TempHpCalculator } from '../lib/temp-hp.calculator';
+import { DamageType } from '../lib/types/damage.types';
+import { CharacterResponseDto } from './character.dto';
+import { Character } from './character.entity';
+import { CharacterRepository } from './character.repository';
 
 @Injectable()
 export class CharacterService {
@@ -125,6 +126,25 @@ export class CharacterService {
         new TempHpAddedEvent(character, previousTempHp),
       );
     }
+
+    return this.toDto(character);
+  }
+
+  async revive(slug: string): Promise<CharacterResponseDto> {
+    const character = await this.characterRepository.findBySlug(slug);
+
+    if (!character) {
+      throw new NotFoundException(`Character "${slug}" not found`);
+    }
+
+    character.currentHp = character.hitPoints;
+    character.tempHp = 0;
+    await this.characterRepository.save(character);
+
+    this.eventEmitter.emit(
+      CharacterEventNames.REVIVED,
+      new CharacterRevivedEvent(character),
+    );
 
     return this.toDto(character);
   }

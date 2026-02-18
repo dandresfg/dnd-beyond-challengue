@@ -92,4 +92,20 @@ export class CharacterController {
   ): Promise<CharacterResponseDto> {
     return this.characterService.addTempHp(slug, dto.amount);
   }
+
+  @Post(':slug/revive')
+  @ApiOperation({ summary: 'Revive character to full HP' })
+  @ApiParam(CHARACTER_SLUG_PARAM_SCHEMA)
+  @ApiResponse({
+    status: 200,
+    description: 'Character revived successfully',
+    type: CharacterResponseDto,
+  })
+  @ApiResponse({ status: 404, description: 'Character not found' })
+  @ApiResponse({ status: 400, description: 'Invalid slug format' })
+  async revive(
+    @Param('slug', SlugValidationPipe) slug: string,
+  ): Promise<CharacterResponseDto> {
+    return this.characterService.revive(slug);
+  }
 }

@@ -1,25 +1,29 @@
-import { CharacterInfoCard } from '@features/character/InfoCard';
 import { HealBanner } from '@features/character/HealBanner';
+import { CharacterInfoCard } from '@features/character/InfoCard';
 import { ActionBar } from '@features/controls/ActionBar';
 import { AttackBanner } from '@features/enemy/AttackBanner';
-import { Navbar } from './Navbar';
-import { Sidebar } from './Sidebar';
-import { Flex } from './Flex';
-import { useBreakpoint } from '@hooks/useMediaQuery';
+import { useCharacter } from '@hooks/useCharacter';
 import { useControls } from '@hooks/useControls';
+import { useBreakpoint } from '@hooks/useMediaQuery';
 import styles from './App.module.css';
+import { Flex } from './Flex';
+import { Navbar } from './Navbar';
+import { PlayerDeadModal } from './PlayerDeadModal';
+import { Sidebar } from './Sidebar';
 
 function App() {
   const { isDesktop } = useBreakpoint();
+  const { player } = useCharacter();
   const {
     logs,
     attackInfo,
     healInfo,
     handleAttackStart,
-    handleHealStart,
     handleAttackComplete,
+    handleHealStart,
     handleHealComplete,
   } = useControls();
+  const isDead = player != null && player.currentHp === 0;
 
   const Banners = (
     <>
@@ -42,6 +46,7 @@ function App() {
 
   return (
     <Flex direction="column" className={styles.appContainer}>
+      {isDead && <PlayerDeadModal player={player} logs={logs} />}
       <Navbar />
       <Flex
         direction={isDesktop ? 'row' : 'column'}

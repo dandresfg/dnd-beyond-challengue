@@ -50,10 +50,7 @@ export const StatsBanner = ({
   isHorizontal = false,
 }: StatsBannerProps) => {
   return (
-    <Group
-      aria-label="Character statistics: Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma"
-      tabIndex={0}
-    >
+    <Group aria-label="Character statistics: Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma">
       <ul
         className={`${styles.list} ${isHorizontal ? styles.horizontal : ''}`}
         aria-label="Character statistics"

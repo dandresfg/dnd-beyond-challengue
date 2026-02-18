@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import { Card } from '@/components/Card';
 import { Flex } from '@/components/Flex';
 import { Text } from '@/components/Text';
-import { DamageType } from '@/types';
+import { useCharacter } from '@/hooks/useCharacter';
 import { useDamage } from '@/hooks/useDamage';
 import { useHealing } from '@/hooks/useHealing';
-import { useCharacter } from '@/hooks/useCharacter';
+import { DamageType } from '@/types';
+import { useState } from 'react';
 import styles from './ActionBar.module.css';
 
 interface ActionBarProps {
