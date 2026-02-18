@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { TypeOrmConfigService } from './config/database.config';
 import { CharacterModule } from './character/character.module';
 import { InitModule } from './init/init.module';
+import { CombatLogModule } from './combat-log/combat-log.module';
 import { CharacterEventsHandler } from './events/character-events.handler';
 
 @Module({
@@ -20,6 +21,7 @@ import { CharacterEventsHandler } from './events/character-events.handler';
     }),
     EventEmitterModule.forRoot(),
     CharacterModule,
+    CombatLogModule,
     InitModule,
   ],
   controllers: [AppController],

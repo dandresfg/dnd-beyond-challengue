@@ -1,14 +1,14 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
-import { CharacterService } from './character.service';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { SlugValidationPipe } from '../lib/pipes/slug-validation.pipe';
 import {
+  AddTempHpDto,
+  CHARACTER_SLUG_PARAM_SCHEMA,
   CharacterResponseDto,
   DealDamageDto,
   HealDto,
-  AddTempHpDto,
-  CHARACTER_SLUG_PARAM_SCHEMA,
 } from './character.dto';
-import { SlugValidationPipe } from '../lib/pipes/slug-validation.pipe';
+import { CharacterService } from './character.service';
 
 @ApiTags('Character')
 @Controller('characters')
