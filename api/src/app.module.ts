@@ -6,7 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmConfigService } from './config/database.config';
 import { CharacterModule } from './character/character.module';
-import { InitModule } from './init/init.module';
+import { SeedModule } from './seed/seed.module';
 import { CombatLogModule } from './combat-log/combat-log.module';
 import { CharacterEventsHandler } from './events/character-events.handler';
 
@@ -22,7 +22,7 @@ import { CharacterEventsHandler } from './events/character-events.handler';
     EventEmitterModule.forRoot(),
     CharacterModule,
     CombatLogModule,
-    InitModule,
+    SeedModule,
   ],
   controllers: [AppController],
   providers: [AppService, CharacterEventsHandler],

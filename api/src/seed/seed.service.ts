@@ -4,8 +4,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 @Injectable()
-export class InitService implements OnModuleInit {
-  private readonly logger = new Logger(InitService.name);
+export class SeedService implements OnModuleInit {
+  private readonly logger = new Logger(SeedService.name);
 
   constructor(private readonly characterRepository: CharacterRepository) {}
 
@@ -20,7 +20,7 @@ export class InitService implements OnModuleInit {
       await this.characterRepository.loadFromJson(brivData);
       this.logger.log('Seeding from briv.json');
     } catch (error) {
-      this.logger.error('Failed to initialize character data', error);
+      this.logger.error('Failed to seed character data', error);
       throw error;
     }
   }

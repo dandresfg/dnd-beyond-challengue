@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { InitService } from './init.service';
 import { CharacterModule } from '../character/character.module';
+import { SeedService } from './seed.service';
 
 @Module({
   imports: [CharacterModule],
-  providers: [InitService],
+  providers: [SeedService],
 })
-export class InitModule {}
+export class SeedModule {}

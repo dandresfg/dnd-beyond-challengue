@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as fs from 'fs';
 import * as path from 'path';
-import { InitService } from './init.service';
+import { SeedService } from './seed.service';
 import { CharacterRepository } from '../character/character.repository';
 import { Character } from '../character/character.entity';
 
@@ -11,8 +11,8 @@ jest.mock('path', () => ({
   join: jest.fn((...args: string[]) => args.join('/')),
 }));
 
-describe('InitService', () => {
-  let service: InitService;
+describe('SeedService', () => {
+  let service: SeedService;
   let characterRepository: jest.Mocked<CharacterRepository>;
 
   const mockBrivData = {
@@ -39,12 +39,12 @@ describe('InitService', () => {
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        InitService,
+        SeedService,
         { provide: CharacterRepository, useValue: mockRepository },
       ],
     }).compile();
 
-    service = module.get(InitService);
+    service = module.get(SeedService);
     characterRepository = module.get(CharacterRepository);
   });
 
