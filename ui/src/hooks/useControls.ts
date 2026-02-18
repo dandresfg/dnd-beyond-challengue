@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { DamageType } from '@/types';
-import { useActionLog } from './useActionLog';
 import { ENEMIES } from '@/features/enemy/data';
+import { DamageType, IDefense } from '@/types';
+import { useState } from 'react';
+import { useActionLog } from './useActionLog';
 
 interface AttackInfo {
   damageType: DamageType;
@@ -19,11 +19,11 @@ export const useControls = () => {
   const { logs, addAttackLog, addHealLog, addTempHpLog, clearLogs } =
     useActionLog();
 
-  const handleAttackStart = (damageType: DamageType, amount: number) => {
+  const handleAttackStart = (damageType: DamageType, amount: number, defenses: IDefense[]) => {
     setAttackInfo({ damageType, amount });
     const enemy = ENEMIES.find((e) => e.damageType === damageType);
     if (enemy) {
-      addAttackLog(damageType, amount, enemy);
+      addAttackLog(damageType, amount, defenses, enemy);
     }
   };
 

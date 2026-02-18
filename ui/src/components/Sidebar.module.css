@@ -105,11 +105,18 @@
     font-size: 16px;
 }
 
-.logTime {
+.logTime, .defenseStatus {
     font-size: 1rem;
     color: #71717a;
     font-family: 'Courier New', monospace;
     text-transform: none;
+}
+
+.IMMUNITY {
+    color: #ef4444;
+}
+.RESISTANCE {
+    color: #fb923c;
 }
 
 .enemyInfo {

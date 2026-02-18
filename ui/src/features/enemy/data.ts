@@ -86,7 +86,7 @@ export const ENEMIES: Enemy[] = [
     id: 'b1',
     name: 'Cindermaw the Eruptor',
     avatarUrl:
-      'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/Boss-14.png',
+      'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/Boss-13.png',
     damageType: DamageType.FIRE,
     attackName: 'Magma Breath',
   },

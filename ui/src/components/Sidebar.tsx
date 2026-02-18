@@ -74,6 +74,11 @@ export const Sidebar = ({ logs }: SidebarProps) => {
                     <Text variant="label" className={styles.logTime}>
                       {formatTime(log.timestamp)}
                     </Text>
+                    {log.defenseStatus ? (
+                      <Text variant="label" className={styles.defenseStatus + ' ' + styles[log.defenseStatus.toUpperCase()]}>
+                        [{log.defenseStatus.toUpperCase()}]
+                      </Text>
+                    ) : null}
                   </Flex>
                   {log.enemy ? (
                     <Flex

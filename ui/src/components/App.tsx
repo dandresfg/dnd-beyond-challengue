@@ -1,3 +1,4 @@
+import { CombatLog } from '@features/character/CombatLog';
 import { HealBanner } from '@features/character/HealBanner';
 import { CharacterInfoCard } from '@features/character/InfoCard';
 import { ActionBar } from '@features/controls/ActionBar';
@@ -8,7 +9,6 @@ import { useBreakpoint } from '@hooks/useMediaQuery';
 import styles from './App.module.css';
 import { Flex } from './Flex';
 import { Navbar } from './Navbar';
-import { PlayerDeadModal } from './PlayerDeadModal';
 import { Sidebar } from './Sidebar';
 
 function App() {
@@ -22,8 +22,10 @@ function App() {
     handleAttackComplete,
     handleHealStart,
     handleHealComplete,
+    clearLogs,
   } = useControls();
   const isDead = player != null && player.currentHp === 0;
+  const attacks = logs.filter((log) => log.type === 'attack')?.length ?? 0;
 
   const Banners = (
     <>
@@ -46,7 +48,13 @@ function App() {
 
   return (
     <Flex direction="column" className={styles.appContainer}>
-      {isDead && <PlayerDeadModal player={player} logs={logs} />}
+      {isDead && (
+        <CombatLog
+          player={player}
+          attacks={attacks}
+          onRetry={clearLogs}
+        />
+      )}
       <Navbar />
       <Flex
         direction={isDesktop ? 'row' : 'column'}

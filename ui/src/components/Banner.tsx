@@ -1,6 +1,6 @@
-import { ReactNode, useEffect, useState, useRef, useCallback } from 'react';
-import styles from './Banner.module.css';
 import { IconX } from '@tabler/icons-react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import styles from './Banner.module.css';
 
 interface BannerProps {
   children: ReactNode;
@@ -8,14 +8,6 @@ interface BannerProps {
   onComplete: () => void;
   timeout?: number;
 }
-
-const isScreenReaderActive = (): boolean => {
-  // Check if user prefers reduced motion (often enabled with screen readers)
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)',
-  ).matches;
-  return prefersReducedMotion;
-};
 
 export const Banner = ({
   children,
@@ -26,7 +18,6 @@ export const Banner = ({
   const [showBanner, setShowBanner] = useState(true);
   const contentRef = useRef<HTMLDivElement>(null);
   const onCompleteRef = useRef(onComplete);
-  const [shouldAutoClose] = useState(!isScreenReaderActive());
 
   useEffect(() => {
     onCompleteRef.current = onComplete;
@@ -39,19 +30,16 @@ export const Banner = ({
       }
     }, 0);
 
-    let closeTimer: NodeJS.Timeout | null = null;
-    if (shouldAutoClose) {
-      closeTimer = setTimeout(() => {
+    const closeTimer = setTimeout(() => {
         setShowBanner(false);
         onCompleteRef.current();
       }, timeout);
-    }
 
     return () => {
       clearTimeout(focusTimer);
-      if (closeTimer) clearTimeout(closeTimer);
+      clearTimeout(closeTimer);
     };
-  }, [timeout, shouldAutoClose]);
+  }, [timeout]);
 
   const handleClose = useCallback(() => {
     setShowBanner(false);

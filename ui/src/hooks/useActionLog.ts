@@ -1,4 +1,5 @@
-import { DamageType, Enemy } from '@/types';
+import { DamageType, DefenseType, Enemy, ICharacter, IDefense } from '@/types';
+import { getDefenseStatus } from '@/utils/damageCalculator';
 import { useState } from 'react';
 
 export interface LogEntry {
@@ -7,8 +8,15 @@ export interface LogEntry {
   type: 'attack' | 'heal' | 'tempHp';
   amount: number;
   damageType?: DamageType;
+  defenseStatus?: DefenseType;
   enemy?: Enemy;
   message: string;
+}
+
+const getEffectiveDamage = (amount: number, defenseStatus: DefenseType | null) => {
+  if(defenseStatus === DefenseType.IMMUNITY) return 0;
+  if(defenseStatus === DefenseType.RESISTANCE) return amount / 2;
+  return amount;
 }
 
 export const useActionLog = () => {
@@ -17,17 +25,20 @@ export const useActionLog = () => {
   const addAttackLog = (
     damageType: DamageType,
     amount: number,
+    defenses: IDefense[],
     enemy: Enemy,
-    result?: string,
   ) => {
+    const defenseStatus = getDefenseStatus({ defenses } as unknown as ICharacter, damageType);
+    const effectiveDamage = getEffectiveDamage(amount, defenseStatus);
     const entry: LogEntry = {
       id: `${Date.now()}-${Math.random()}`,
       timestamp: new Date(),
       type: 'attack',
-      amount,
+      amount: effectiveDamage,
       damageType,
+      defenseStatus: defenseStatus ?? undefined,
       enemy,
-      message: result || `dealt ${amount} ${damageType} damage`,
+      message: `dealt ${effectiveDamage} ${damageType} damage`,
     };
     setLogs((prev) => [entry, ...prev]);
   };

@@ -4,12 +4,12 @@ import { Text } from '@/components/Text';
 import { useCharacter } from '@/hooks/useCharacter';
 import { useDamage } from '@/hooks/useDamage';
 import { useHealing } from '@/hooks/useHealing';
-import { DamageType } from '@/types';
+import { DamageType, IDefense } from '@/types';
 import { useState } from 'react';
 import styles from './ActionBar.module.css';
 
 interface ActionBarProps {
-  onAttackStart: (damageType: DamageType, amount: number) => void;
+  onAttackStart: (damageType: DamageType, amount: number, defenses: IDefense[]) => void;
   onHealStart: (type: 'heal' | 'tempHp', amount: number) => void;
 }
 
@@ -27,7 +27,7 @@ export const ActionBar = ({ onAttackStart, onHealStart }: ActionBarProps) => {
     if (!player || attackAmount <= 0) return;
 
     try {
-      onAttackStart(damageType, attackAmount);
+      onAttackStart(damageType, attackAmount, player.defenses || []);
       await applyDamage({ damageType, amount: attackAmount });
     } catch (error) {
       console.error('Failed to apply damage:', error);
