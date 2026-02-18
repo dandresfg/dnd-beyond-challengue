@@ -40,11 +40,9 @@ bun dev # Requires concurrently
 **Optional — run each server on its own:**
 
 ```bash
-bun run dev:ui    # UI only (Vite dev server)
-bun run dev:api   # API only (NestJS)
+bun run dev:ui    # UI only (Vite) ::5173
+bun run dev:api   # API only (NestJS) ::3000
 ```
-
-With the API running, **Swagger docs** are [here](http://localhost:3000/api/docs).
 
 ## Database (API)
 
@@ -63,3 +61,8 @@ The API uses **SQLite** by default (no extra setup).
    ```
    DB_TYPE=mysql
    ```
+
+
+## After Install
+- **Try UI** [here](http://localhost:5173).
+- **Swagger docs** are [here](http://localhost:3000/api/docs).
