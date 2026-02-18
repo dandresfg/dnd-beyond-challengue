@@ -56,7 +56,7 @@ export const PlayerDeadModal = ({ player, logs }: PlayerDeadModalProps) => {
           <Flex direction="row" align="center" gap={1}>
             <IconSwords className={styles.sectionIcon} aria-hidden />
             <Text variant="label" className={styles.sectionTitle}>
-              Enemies Defeated
+              Attacks Survived
             </Text>
           </Flex>
           <div className={styles.countBox}>

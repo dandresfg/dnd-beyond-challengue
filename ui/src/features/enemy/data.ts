@@ -1,5 +1,14 @@
 import { DamageType, Enemy } from '@/types';
 
+export const ENEMY_FALLBACK: Enemy = {
+  id: 'fallback',
+  name: "The Bleeding Beast, Nature's Fury",
+  avatarUrl:
+    'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/Boss-12.png',
+  damageType: DamageType.SLASHING,
+  attackName: 'Primal Maul',
+};
+
 export const ENEMIES: Enemy[] = [
   {
     id: 'e1',
@@ -14,23 +23,15 @@ export const ENEMIES: Enemy[] = [
     name: 'Ignis, Ember of the Void',
     avatarUrl:
       'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-2.png',
-    damageType: DamageType.FIRE,
+    damageType: DamageType.PIERCING,
     attackName: 'Hellfire Burst',
-  },
-  {
-    id: 'e3',
-    name: 'Vorlag, Shadow of Winter',
-    avatarUrl:
-      'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-3.png',
-    damageType: DamageType.COLD,
-    attackName: 'Touch of the Grave',
   },
   {
     id: 'e4',
     name: 'Viper, the Silent Arrow',
     avatarUrl:
       'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-4.png',
-    damageType: DamageType.PIERCING,
+    damageType: DamageType.POISON,
     attackName: 'Poisoned Bolt',
   },
   {
@@ -78,22 +79,14 @@ export const ENEMIES: Enemy[] = [
     name: 'Construct Alpha-9',
     avatarUrl:
       'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-10.png',
-    damageType: DamageType.FORCE,
-    attackName: 'Arcane Missiles',
-  },
-  {
-    id: 'e11',
-    name: 'Construct Alpha-2',
-    avatarUrl:
-      'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/npc-10.png',
     damageType: DamageType.THUNDER,
-    attackName: 'Sonic Pulse',
+    attackName: 'Arcane Missiles',
   },
   {
     id: 'b1',
     name: 'Cindermaw the Eruptor',
     avatarUrl:
-      'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/Boss-11.png',
+      'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/Boss-14.png',
     damageType: DamageType.FIRE,
     attackName: 'Magma Breath',
   },
@@ -101,24 +94,16 @@ export const ENEMIES: Enemy[] = [
     id: 'b2',
     name: 'Cryonax the Glacial Tyrant',
     avatarUrl:
-      'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/Boss-12.png',
+      'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/Boss-14.png',
     damageType: DamageType.COLD,
     attackName: 'Flash Freeze',
-  },
-  {
-    id: 'b3',
-    name: "The Bleeding Beast, Nature's Fury",
-    avatarUrl:
-      'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/Boss-13.png',
-    damageType: DamageType.SLASHING,
-    attackName: 'Primal Maul',
   },
   {
     id: 'b4',
     name: "K'thul, The Slumbering Terror",
     avatarUrl:
-      'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/Boss-14.png',
-    damageType: DamageType.PSYCHIC,
+      'https://dnd-beyond-test.s3.sa-east-1.amazonaws.com/assets/Boss-11.png',
+    damageType: DamageType.RADIANT,
     attackName: 'Cosmic Madness',
   },
   {

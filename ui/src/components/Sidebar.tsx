@@ -7,6 +7,12 @@ interface SidebarProps {
   logs: LogEntry[];
 }
 
+const logColorMap: Record<LogEntry['type'], string> = {
+  attack: styles.attackLog,
+  heal: styles.healLog,
+  tempHp: styles.tempLog,
+};
+
 export const Sidebar = ({ logs }: SidebarProps) => {
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', {
@@ -15,18 +21,6 @@ export const Sidebar = ({ logs }: SidebarProps) => {
       hour12: true,
     });
   };
-
-  const getLogColor = (type: LogEntry['type']) => {
-    switch (type) {
-      case 'attack':
-        return styles.attackLog;
-      case 'heal':
-        return styles.healLog;
-      case 'tempHp':
-        return styles.tempLog;
-    }
-  };
-
   return (
     <aside
       className={styles.sidebar}
@@ -66,7 +60,7 @@ export const Sidebar = ({ logs }: SidebarProps) => {
               return (
                 <div
                   key={log.id}
-                  className={`${styles.logEntry} ${getLogColor(log.type)}`}
+                  className={`${styles.logEntry} ${logColorMap[log.type]}`}
                   tabIndex={0}
                   role="article"
                   aria-label={`${log.type} log entry. ${description}`}

@@ -12,7 +12,7 @@ import {
 } from '@/utils/damageCalculator';
 import { useMemo } from 'react';
 import styles from './AttackBanner.module.css';
-import { ENEMIES } from './data';
+import { ENEMIES, ENEMY_FALLBACK } from './data';
 
 interface AttackBannerProps {
   damageType: DamageType;
@@ -25,8 +25,8 @@ export const AttackBanner = ({
   amount,
   onComplete,
 }: AttackBannerProps) => {
-  const enemy = useMemo<Enemy | null>(
-    () => ENEMIES.find((e) => e.damageType === damageType) || null,
+  const enemy = useMemo<Enemy>(
+    () => ENEMIES.find((e) => e.damageType === damageType) || ENEMY_FALLBACK,
     [damageType],
   );
   const { player } = useCharacter();
@@ -41,11 +41,6 @@ export const AttackBanner = ({
     if (!player) return null;
     return getDefenseStatus(player, damageType);
   }, [player, damageType]);
-
-  if (!enemy) {
-    console.error(`Enemy not found for damage type: ${damageType}`);
-    return null;
-  }
 
   return (
     <Banner variant="danger" onComplete={onComplete}>
